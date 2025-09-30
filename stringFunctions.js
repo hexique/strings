@@ -576,3 +576,41 @@ function removeDublicates(string){
 
     return result;
 }
+
+// 2 strings
+
+function sortStrings(strings){
+    return strings.sort((string1, string2) => {return string1.length - string2.length})
+}
+
+function merge(strings){
+    let result = "";
+    strings = sortStrings(strings)
+
+    for(let i = 0; i < strings[1].length; i++){
+        // result += `<a style="color: red">${strings[1][i]}</a>`
+        result += strings[1][i]
+        if(i < strings[0].length){
+            // result += `<a style="color: green">${strings[0][i]}</a>`
+            result += strings[0][i]
+        }
+    }
+
+    return result;
+}
+
+function average(strings){
+    let result = "";
+    strings = sortStrings(strings)
+
+    for(let i = 0; i < strings[1].length; i++){
+        // result += `<a style="color: red">${strings[1][i]}</a>`
+        result += strings[1][i]
+        if(i < strings[0].length){
+            // result += `<a style="color: green">${strings[0][i]}</a>`
+            result += strings[0][i]
+        }
+    }
+
+    return result;
+}
