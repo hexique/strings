@@ -392,7 +392,7 @@ function base64(string){
 function convertToNumberSys(string, num){
     let result = "";
     for (var i = 0; i < string.length; i++) {
-         result += string[i].charCodeAt(0).toString(num) + " ";
+        result += string[i].charCodeAt(0).toString(num) + " ";
     }
     return result;
 }
@@ -451,6 +451,14 @@ function toHex(string) {
 
 function to36(string) {
     return convertToNumberSys(string, 36);
+}
+
+function toNumber(string){
+    let result = "";
+    for (var i = 0; i < string.length; i++) {
+        result += string[i].charCodeAt(0).toString(16) + "";
+    }
+    return Number(`0x${result}`);
 }
 
 function eng2rus(string){
@@ -577,6 +585,43 @@ function removeDublicates(string){
     return result;
 }
 
+function shiftByValue(string, shift){
+    let result = "";
+
+    for (var i = 0; i < string.length; i++) {
+        result += "&#" + (parseInt(string.charCodeAt(i)) + shift);
+    }
+
+    return result;
+}
+
+function shiftBy1(string){
+    return shiftByValue(string, 1)
+}
+
+function shiftByMinus1(string){
+    return shiftByValue(string, -1)
+}
+
+function shiftBy22(string){
+    return shiftByValue(string, 22)
+}
+
+function hash(string) {
+
+    let result = 0;
+
+    if (string.length == 0) return 0;
+
+    for (i = 0; i < string.length; i++) {
+        char = string.charCodeAt(i);
+        result = ((result << 5) - result) + char;
+        result = result & result;
+    }
+
+    return result
+}
+
 // 2 strings
 
 function sortStrings(strings){
@@ -588,11 +633,11 @@ function merge(strings){
     strings = sortStrings(strings)
 
     for(let i = 0; i < strings[1].length; i++){
-        // result += `<a style="color: red">${strings[1][i]}</a>`
-        result += strings[1][i]
+        result += `<a class="red">${strings[1][i]}</a>`
+        // result += strings[1][i]
         if(i < strings[0].length){
-            // result += `<a style="color: green">${strings[0][i]}</a>`
-            result += strings[0][i]
+            result += `<a class="green">${strings[0][i]}</a>`
+            // result += strings[0][i]
         }
     }
 
@@ -603,14 +648,53 @@ function average(strings){
     let result = "";
     strings = sortStrings(strings)
 
-    for(let i = 0; i < strings[1].length; i++){
-        // result += `<a style="color: red">${strings[1][i]}</a>`
-        result += strings[1][i]
+    for (var i = 0; i < strings[1].length; i++) {
         if(i < strings[0].length){
-            // result += `<a style="color: green">${strings[0][i]}</a>`
-            result += strings[0][i]
+            result += "&#" + Math.round((parseInt(strings[0].charCodeAt(i)) + parseInt(strings[1].charCodeAt(i))) / 2);
+            console.log(result)
+        } else {
+            result += "&#" + parseInt(strings[1].charCodeAt(i));
+
+        console.log(`${Math.round(parseInt(strings[0].charCodeAt(i)) + parseInt(strings[1].charCodeAt(i)) / 2)}`)
         }
     }
 
     return result;
 }
+
+function filter(strings){
+    let result = "";
+
+    for (var i = 0; i < strings[0].length; i++) {
+        if(!strings[1].includes(strings[0][i])){
+            result += `<a class="green">${strings[0][i]}</a>`
+        }
+    }
+
+    return result;
+}
+
+function negativeFilter(strings){
+    let result = "";
+
+    for (var i = 0; i < strings[0].length; i++) {
+        if(strings[1].includes(strings[0][i])){
+            result += `<a class="red">${strings[0][i]}</a>`
+        }
+    }
+
+    return result;
+}
+
+function negativeFilter(strings){
+    let result = "";
+
+    for (var i = 0; i < strings[0].length; i++) {
+        if(strings[1].includes(strings[0][i])){
+            result += `<a class="red">${strings[0][i]}</a>`
+        }
+    }
+
+    return result;
+}
+
