@@ -1,16 +1,19 @@
 const methods = [[lowerCase, upperCase, insertSpaces, rus2eng, eng2rus, rusByEng, 
-    base64, letterCount, changeLayout, toBroken,
+    base64, letterCount, changeLayout, toBroken, leed,
     reverse, reverseWords, upsideDown,
     sortSymbols, sortWords,
     oddSymbols, squareSymbols, removeDublicates,
-    leed, toBin, toDec, toHex, to36,
+    shiftBy1, shiftByMinus1, shiftBy22, 
+    toBin, toDec, toHex, to36, toNumber, hash,
     logos], [
-    merge
+    filter, negativeFilter, merge, average
     ]]
+
+console.log(methods[0].length + methods[1].length)
 
 while(true){
     document.title = methods[0][Math.floor(Math.random() * methods[0].length)]("strings")
-    if(document.title !== "strings"){
+    if(document.title !== "strings" & document.title.length >= 7 & document.title.length <= 14){
         break;
     }
 }
