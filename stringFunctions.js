@@ -335,6 +335,30 @@ const logosData = {
     "8": "https://cdn.worldvectorlogo.com/logos/ios-8-1.svg",
     "9": "https://cdn.worldvectorlogo.com/logos/9-tv.svg",
 }
+
+const typoData = {
+    "A": "S",
+    "B": "B",
+    "C": "C",
+    "D": "E",
+    "E": "W",
+    "F": "F",
+    "G": "G",
+    "H": "J",
+    "I": "J",
+    "J": "J",
+    "K": "H",
+    "L": "'",
+    "M": ",",
+    "O": "P",
+    "P": "[",
+    "Q": "Q",
+    "R": "E",
+    "S": "D",
+    "T": "Y",
+    "Y": "",
+}
+
 function replaceByObj(string, obj){
     let result = "";
 
@@ -537,6 +561,10 @@ function sortSymbols(string){
     return string.split("").sort().join("")
 }
 
+function sortByLength(string){
+    return string.split(" ").sort((string1, string2) => {return string1.length - string2.length}).join(" ")
+}
+
 function sortWords(string){
     return string.split(" ").sort().join(" ")
 }
@@ -583,6 +611,57 @@ function removeDublicates(string){
     }
 
     return result;
+}
+
+function abbreviation(string){
+    let result = "";
+    string = string.split(" ")
+
+    for(let i = 0; i < string.length; i++){
+        if(string[i].length > 0){
+            result += string[i][0].toUpperCase() + "."
+        }
+    }
+
+    return result;
+}
+
+function length(string){
+    return string.length
+}
+
+function wordsLength(string){
+    return string.split(" ").length
+}
+
+function divisiors(n){
+    let result = 1
+    if(n > 1)
+        for(let i = 2; i <= n; i++){
+            if(n % i == 0){
+                result++
+            }
+        }
+    return result
+}
+
+function typo(string){
+    let result = "";
+
+    for(let i = 0; i < string.length; i++){
+        if(divisiors(i) == 2){
+            if(typoData[string[i]] !== undefined){
+                result += typoData[string[i]]
+            } else if(typoData[string[i].toUpperCase()] !== undefined){
+                result += typoData[string.toUpperCase()[i]].toLowerCase()
+            } else {
+                result += string[i]
+            }
+        } else {
+            result += string[i]
+        }
+    }
+    return result
 }
 
 function shiftByValue(string, shift){
@@ -685,16 +764,3 @@ function negativeFilter(strings){
 
     return result;
 }
-
-function negativeFilter(strings){
-    let result = "";
-
-    for (var i = 0; i < strings[0].length; i++) {
-        if(strings[1].includes(strings[0][i])){
-            result += `<a class="red">${strings[0][i]}</a>`
-        }
-    }
-
-    return result;
-}
-

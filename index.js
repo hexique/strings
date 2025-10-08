@@ -1,22 +1,22 @@
 const methods = [[lowerCase, upperCase, insertSpaces, rus2eng, eng2rus, rusByEng, 
     base64, letterCount, changeLayout, toBroken, leed,
-    reverse, reverseWords, upsideDown,
-    sortSymbols, sortWords,
+    reverse, reverseWords, upsideDown, 
+    sortSymbols, sortWords, sortByLength,
     oddSymbols, squareSymbols, removeDublicates,
     shiftBy1, shiftByMinus1, shiftBy22, 
-    toBin, toDec, toHex, to36, toNumber, hash,
+    toBin, toDec, toHex, to36, toNumber, 
+    hash, abbreviation, typo,
+    length, wordsLength,
     logos], [
     filter, negativeFilter, merge, average
     ]]
 
 console.log(methods[0].length + methods[1].length)
 
-while(true){
+while(document.title.length < 7 || document.title.length > 14){
     document.title = methods[0][Math.floor(Math.random() * methods[0].length)]("strings")
-    if(document.title !== "strings" & document.title.length >= 7 & document.title.length <= 14){
-        break;
-    }
 }
+
 function formatString(){
     const string = [document.getElementById("string-input-1").value, document.getElementById("string-input-2")]
     document.querySelector("div").innerHTML = ''
@@ -31,14 +31,15 @@ function formatString(){
     <button onclick="formatString()">Submit</button>`
 
     if(string[1] !== null){
-        for(let i = 0; i < methods[1].length; i++){
-            console.log(string[1].value)
-            document.querySelector("div").innerHTML += `
-            <br><h3>.${methods[1][i].name}()</h3><p>${methods[1][i]([string[0], string[1].value])}</p>`
-        }
+        if(string[1].value !== ""){
+            for(let i = 0; i < methods[1].length; i++){
+                console.log(string[1].value)
+                document.querySelector("div").innerHTML += `
+                <br><h3>.${methods[1][i].name}()</h3><p>${methods[1][i]([string[0], string[1].value])}</p>`
+            }
 
-        // console.log(document.getElementById("string-input-2").value, string[1].value)
-        document.getElementById("string-input-2").value = string[1].value
-        
+            // console.log(document.getElementById("string-input-2").value, string[1].value)
+            document.getElementById("string-input-2").value = string[1].value
+        }
     }
 }
