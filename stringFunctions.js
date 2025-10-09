@@ -225,6 +225,54 @@ const rusByEngData = {
     "Я": "9I",
 }
 
+const alphabetIdData = [
+    ["А", "A"], ["Б", "B"], ["В", "C"], ["Г", "D"], ["Д", "E"], ["Е", "F"], ["Ё", "G"], ["Ж", "H"], ["З", "I"], ["И", "J"], ["Й", "K"], ["К", "L"],
+    ["Л", "M"], ["М", "N"], ["Н", "O"], ["О", "P"], ["П", "Q"], ["Р", "R"], ["С", "S"], ["Т", "T"], ["У", "U"], ["Ф", "V"], ["Х", "W"], ["Ц", "X"],
+    ["Ш", "Y"], ["Щ", "Z"], ["Ъ", ""], ["Ы", ""], ["Ь", ""], ["Э", ""], ["Ю", ""], ["Я", ""]
+]
+
+const logosData = {
+    " ": "https://tedmontgomery.com/tutorial/graphics/white.gif",
+
+    "A": "https://cdn.worldvectorlogo.com/logos/adobe-2.svg",
+    "B": "https://cdn.worldvectorlogo.com/logos/bitcoin.svg",
+    "C": "https://cdn.worldvectorlogo.com/logos/c-1.svg",
+    "D": "https://cdn.worldvectorlogo.com/logos/disqus-1.svg",
+    "E": "https://cdn.worldvectorlogo.com/logos/internet-explorer-4.svg",
+    "F": "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
+    "G": "https://cdn.worldvectorlogo.com/logos/google-g-2015.svg",
+    "H": "https://cdn.worldvectorlogo.com/logos/half-life-2-1.svg",
+    "I": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F1c%2Fc9%2F26%2F1cc92622eef44ae702803ab86800b696.png&f=1&nofb=1&ipt=29d11af185e917cd08182936f58bfceefbed15cf322a4e8febbffb044bb2502b",
+    "J": "https://cdn.worldvectorlogo.com/logos/juventus-futebol-clube-da-barra-do-ribeiro-rs.svg",
+    "K": "https://cdn.worldvectorlogo.com/logos/kotlin.svg", //https://cdn.worldvectorlogo.com/logos/kotlin-1.svg
+    "L": "https://cdn.worldvectorlogo.com/logos/laravel-1.svg",
+    "M": "https://cdn.worldvectorlogo.com/logos/mcdonalds-5.svg",
+    "N": "https://cdn.worldvectorlogo.com/logos/netflix-logo-icon.svg",
+    "O": "https://cdn.worldvectorlogo.com/logos/opera-2.svg",
+    "P": "https://cdn.worldvectorlogo.com/logos/pinterest-3.svg",
+    "Q": "https://cdn.worldvectorlogo.com/logos/qfx.svg",
+    "R": "https://cdn.worldvectorlogo.com/logos/rockstar-games.svg",
+    "S": "https://cdn.worldvectorlogo.com/logos/skype-icon.svg",
+    "T": "https://cdn.worldvectorlogo.com/logos/tumblr-icon-1.svg",
+    "U": "https://cdn.worldvectorlogo.com/logos/unreal-1.svg",
+    "V": "https://cdn.worldvectorlogo.com/logos/vimeo-icon-blue.svg",
+    "W": "https://cdn.worldvectorlogo.com/logos/volkswagen-7.svg",
+    "X": "https://cdn.worldvectorlogo.com/logos/x-2.svg",
+    "Y": "https://cdn.worldvectorlogo.com/logos/yahoo-icon.svg",
+    "Z": "https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg",
+
+    "0": "https://cdn.worldvectorlogo.com/logos/opera-14.svg",
+    "1": "https://tvepg.eu/img/russia/logo/pervyi_kanal.png",
+    "2": "https://cdn.worldvectorlogo.com/logos/fox-2-1.svg",
+    "3": "https://cdn.worldvectorlogo.com/logos/radio-3.svg",
+    "4": "https://cdn.worldvectorlogo.com/logos/rete-4-2.svg",
+    "5": "https://cdn.worldvectorlogo.com/logos/html-1.svg",
+    "6": "https://cdn.worldvectorlogo.com/logos/sbs-6-1.svg",
+    "7": "https://cdn.worldvectorlogo.com/logos/7-eleven-logo-1.svg",
+    "8": "https://cdn.worldvectorlogo.com/logos/ios-8-1.svg",
+    "9": "https://cdn.worldvectorlogo.com/logos/9-tv.svg",
+}
+
 const upsideDownData = {
     " ": " ",
 
@@ -294,48 +342,6 @@ const upsideDownData = {
     "9": "6",
 }
 
-const logosData = {
-    " ": "https://tedmontgomery.com/tutorial/graphics/white.gif",
-
-    "A": "https://cdn.worldvectorlogo.com/logos/adobe-2.svg",
-    "B": "https://cdn.worldvectorlogo.com/logos/bitcoin.svg",
-    "C": "https://cdn.worldvectorlogo.com/logos/c-1.svg",
-    "D": "https://cdn.worldvectorlogo.com/logos/disqus-1.svg",
-    "E": "https://cdn.worldvectorlogo.com/logos/internet-explorer-4.svg",
-    "F": "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
-    "G": "https://cdn.worldvectorlogo.com/logos/google-g-2015.svg",
-    "H": "https://cdn.worldvectorlogo.com/logos/half-life-2-1.svg",
-    "I": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F1c%2Fc9%2F26%2F1cc92622eef44ae702803ab86800b696.png&f=1&nofb=1&ipt=29d11af185e917cd08182936f58bfceefbed15cf322a4e8febbffb044bb2502b",
-    "J": "https://cdn.worldvectorlogo.com/logos/juventus-futebol-clube-da-barra-do-ribeiro-rs.svg",
-    "K": "https://cdn.worldvectorlogo.com/logos/kotlin.svg", //https://cdn.worldvectorlogo.com/logos/kotlin-1.svg
-    "L": "https://cdn.worldvectorlogo.com/logos/laravel-1.svg",
-    "M": "https://cdn.worldvectorlogo.com/logos/mcdonalds-5.svg",
-    "N": "https://cdn.worldvectorlogo.com/logos/netflix-logo-icon.svg",
-    "O": "https://cdn.worldvectorlogo.com/logos/opera-2.svg",
-    "P": "https://cdn.worldvectorlogo.com/logos/pinterest-3.svg",
-    "Q": "https://cdn.worldvectorlogo.com/logos/qfx.svg",
-    "R": "https://cdn.worldvectorlogo.com/logos/rockstar-games.svg",
-    "S": "https://cdn.worldvectorlogo.com/logos/skype-icon.svg",
-    "T": "https://cdn.worldvectorlogo.com/logos/tumblr-icon-1.svg",
-    "U": "https://cdn.worldvectorlogo.com/logos/unreal-1.svg",
-    "V": "https://cdn.worldvectorlogo.com/logos/vimeo-icon-blue.svg",
-    "W": "https://cdn.worldvectorlogo.com/logos/volkswagen-7.svg",
-    "X": "https://cdn.worldvectorlogo.com/logos/x-2.svg",
-    "Y": "https://cdn.worldvectorlogo.com/logos/yahoo-icon.svg",
-    "Z": "https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg",
-
-    "0": "https://cdn.worldvectorlogo.com/logos/opera-14.svg",
-    "1": "https://tvepg.eu/img/russia/logo/pervyi_kanal.png",
-    "2": "https://cdn.worldvectorlogo.com/logos/fox-2-1.svg",
-    "3": "https://cdn.worldvectorlogo.com/logos/radio-3.svg",
-    "4": "https://cdn.worldvectorlogo.com/logos/rete-4-2.svg",
-    "5": "https://cdn.worldvectorlogo.com/logos/html-1.svg",
-    "6": "https://cdn.worldvectorlogo.com/logos/sbs-6-1.svg",
-    "7": "https://cdn.worldvectorlogo.com/logos/7-eleven-logo-1.svg",
-    "8": "https://cdn.worldvectorlogo.com/logos/ios-8-1.svg",
-    "9": "https://cdn.worldvectorlogo.com/logos/9-tv.svg",
-}
-
 const typoData = {
     "A": "S",
     "B": "B",
@@ -357,6 +363,12 @@ const typoData = {
     "S": "D",
     "T": "Y",
     "Y": "",
+}
+
+
+
+function saveHTML(string){
+    return String(string).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
 
 function replaceByObj(string, obj){
@@ -701,6 +713,30 @@ function hash(string) {
     return result
 }
 
+function strikethrough(string) {
+    let result = "";
+
+    for (let i = 0; i < string.length; i++) {
+        result += `${string[i]}̶`
+    }
+
+    return result;
+}
+
+function alphabetID(string){
+    let result = "";
+
+    for (let i = 0; i < string.length; i++) {
+        for (let letter = 0; letter < alphabetIdData.length; letter++){
+            if(alphabetIdData[letter].includes(string[i].toUpperCase())){
+                result += String(letter + 1) + " "
+            }
+        }
+    }
+
+    return result;
+}
+
 // 2 strings
 
 function sortStrings(strings){
@@ -759,6 +795,34 @@ function negativeFilter(strings){
     for (var i = 0; i < strings[0].length; i++) {
         if(strings[1].includes(strings[0][i])){
             result += `<a class="red">${strings[0][i]}</a>`
+        }
+    }
+
+    return result;
+}
+
+function insert(strings){
+    let result = "";
+
+    for (var i = 0; i < strings[0].length - 1; i++) {
+        result += `<a class="red">${strings[0][i]}</a><a class="green">${strings[1]}</a>`
+    }
+    result += `<a class="red">${strings[0][strings[0].length - 1]}</a>`
+
+    return result;
+}
+
+function mergeReplace(strings){
+    let result = "";
+    strings = sortStrings(strings)
+
+    for(let i = 0; i < strings[1].length; i++){
+        if(i % 2 == 0){
+            result += `<a class="red">${strings[1][i]}</a>`
+        } else {
+            if(i < strings[0].length){
+                result += `<a class="green">${strings[0][i]}</a>`
+            }
         }
     }
 

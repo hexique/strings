@@ -5,10 +5,10 @@ const methods = [[lowerCase, upperCase, insertSpaces, rus2eng, eng2rus, rusByEng
     oddSymbols, squareSymbols, removeDublicates,
     shiftBy1, shiftByMinus1, shiftBy22, 
     toBin, toDec, toHex, to36, toNumber, 
-    hash, abbreviation, typo,
+    alphabetID, hash, abbreviation, typo, strikethrough,
     length, wordsLength,
     logos], [
-    filter, negativeFilter, merge, average
+    filter, negativeFilter, merge, mergeReplace, average, insert
     ]]
 
 console.log(methods[0].length + methods[1].length)
