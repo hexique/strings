@@ -1,3 +1,7 @@
+const letters = ["А","Б","В","В","Г","Д","Е","Ё","Ж","З","И","Й","К","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я",
+"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+]
+
 const rus2engTranslate = {
     "А": "A",
     "Б": "B",
@@ -369,6 +373,149 @@ const axiusLinkData = {
 
 }
 
+const japaneseData = {
+    "kya": "きゃ",
+    "kyu": "きゅ",
+    "kyo": "きょ",
+    "shi": "し",
+    "sha": "しゃ",
+    "shu": "しゅ",
+    "sho": "しょ",
+    "sya": "シャ",
+    "syu": "シュ",
+    "chi": "ち",
+    "tsu": "つ",
+    "tya": "ちゃ",
+    "tyu": "ちゅ",
+    "tyo": "ちょ",
+    "nya": "にゃ",
+    "nyu": "にゅ",
+    "nyo": "にょ",
+    "hya": "ひゃ",
+    "hyu": "ひゅ",
+    "hyo": "ひょ",
+    "mya": "みゃ",
+    "myu": "みゅ",
+    "myo": "みょ",
+    "rya": "りゃ",
+    "ryu": "りゅ",
+    "ryo": "りょ",
+    "wya": "ヰャ",
+    "wyu": "ヰュ",
+    "wyo": "ヰョ",
+    "iya": "ゐゃ",
+    "iyu": "ゐゅ",
+    "iyo": "ゐょ",
+    "gya": "ぎゃ",
+    "gyu": "ぎゅ",
+    "gyo": "ぎょ",
+    "zya": "ジャ",
+    "zyu": "ジュ",
+    "dya": "ヂャ",
+    "dyu": "ヂュ",
+    "dyo": "ヂョ",
+    "bya": "びゃ",
+    "byu": "びゅ",
+    "byo": "びょ",
+    "pya": "ぴゃ",
+    "pyu": "ぴゅ",
+    "pyo": "ぴょ",
+    "ka": "か",
+    "ki": "き",
+    "ku": "く",
+    "ke": "け",
+    "ko": "こ",
+    "sa": "さ",
+    "si": "シ",
+    "su": "す",
+    "se": "せ",
+    "so": "そ",
+    "ta": "た",
+    "ti": "チ",
+    "tu": "ツ",
+    "te": "て",
+    "to": "と",
+    "na": "な",
+    "ni": "に",
+    "nu": "ぬ",
+    "ne": "ね",
+    "no": "の",
+    "ha": "は",
+    "hi": "ひ",
+    "fu": "ふ",
+    "hu": "フ",
+    "he": "へ",
+    "ho": "ほ",
+    "ma": "ま",
+    "mi": "み",
+    "mu": "む",
+    "me": "め",
+    "mo": "も",
+    "ya": "や",
+    "yu": "ゆ",
+    "yo": "よ",
+    "ra": "ら",
+    "ri": "り",
+    "ru": "る",
+    "re": "れ",
+    "ro": "ろ",
+    "wa": "わ",
+    "wi": "ヰ",
+    "we": "ヱ",
+    "wo": "ヲ",
+    "ga": "が",
+    "gi": "ぎ",
+    "gu": "ぐ",
+    "ge": "げ",
+    "go": "ご",
+    "za": "ざ",
+    "ji": "じ",
+    "zi": "ジ",
+    "zu": "ず",
+    "ze": "ぜ",
+    "zo": "ぞ",
+    "ja": "じゃ",
+    "ju": "じゅ",
+    "jo": "じょ",
+    "da": "だ",
+    "di": "ヂ",
+    "du": "ヅ",
+    "de": "で",
+    "do": "ど",
+    "ba": "ば",
+    "bi": "び",
+    "bu": "ぶ",
+    "be": "べ",
+    "bo": "ぼ",
+    "pa": "ぱ",
+    "pi": "ぴ",
+    "pu": "ぷ",
+    "pe": "ぺ",
+    "po": "ぽ",
+    "vu": "ゔ",
+    "a": "あ",
+    "i": "い",
+    "u": "う",
+    "e": "え",
+    "o": "お",
+
+    "k": "く",
+    "s": "す",
+    "t": "ツ",
+    "n": "ぬ",
+    "f": "ふ",
+    "h": "フ",
+    "m": "む",
+    "y": "ゆ",
+    "r": "る",
+    "g": "ぐ",
+    "z": "ず",
+    "j": "じゅ",
+    "d": "ヅ",
+    "b": "ぶ",
+    "p": "ぷ",
+    "v": "ゔ",
+}
 
 function saveHTML(string){
     return String(string).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
@@ -524,6 +671,20 @@ function eng2rus(string){
 
 function rus2eng(string){
     return replaceByObj(string, rus2engTranslate);
+}
+
+function toJap(string){
+    string = rus2eng(string).toLowerCase()
+
+    for(let i = 0; i < Object.keys(japaneseData).length; i++){
+        string = string.replaceAll(Object.keys(japaneseData)[i], Object.values(japaneseData)[i])
+    }
+
+    for(let i = 0; i < letters.length; i++){
+        string = string.toUpperCase().replaceAll(letters[i], "")
+    }
+
+    return string
 }
 
 function leed(string){
