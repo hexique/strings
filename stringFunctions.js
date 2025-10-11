@@ -365,6 +365,9 @@ const typoData = {
     "Y": "",
 }
 
+const axiusLinkData = {
+
+}
 
 
 function saveHTML(string){
@@ -407,6 +410,24 @@ function lowerCase(string){
 
 function upperCase(string){
     return string.toUpperCase()
+}
+
+function title(string){
+    string = string.split(" ")
+    let result = "";
+
+    for(let i = 0; i < string.length; i++){
+        for(let letter = 0; letter < string[i].length; letter++){
+            if(letter == 0){
+                result += string[i][letter].toUpperCase()
+            } else {
+                result += string[i][letter].toLowerCase()
+            }
+        }
+        result += " "
+    }
+
+    return result;
 }
 
 function base64(string){
@@ -639,7 +660,7 @@ function abbreviation(string){
 }
 
 function length(string){
-    return string.length
+    return `Symbols: ${string.length}<br>Words: ${string.split(" ").length}<br>Sentences: ${string.split(".").length}`
 }
 
 function wordsLength(string){
@@ -721,6 +742,10 @@ function strikethrough(string) {
     }
 
     return result;
+}
+
+function axiusLink(string){
+    return replaceByObj(string, axiusLinkData)
 }
 
 function alphabetID(string){
