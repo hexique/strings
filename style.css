@@ -7,6 +7,14 @@ a{
   color: #ffff;
 }
 
+.red{
+  color: hsl(0, 50%, 45%);
+}
+
+.green{
+  color: hsl(120, 50%, 45%);
+}
+
 p{
   color: #808080;
   font-family: Arial;
