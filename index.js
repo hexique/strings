@@ -1,14 +1,17 @@
-const methods = [[lowerCase, upperCase, insertSpaces, rus2eng, eng2rus, rusByEng, 
-    base64, letterCount, changeLayout, toBroken, leed,
-    reverse, reverseWords, upsideDown, 
-    sortSymbols, sortWords, sortByLength,
-    oddSymbols, squareSymbols, removeDublicates,
-    shiftBy1, shiftByMinus1, shiftBy22, 
-    toBin, toDec, toHex, to36, toNumber, 
-    alphabetID, hash, abbreviation, typo, strikethrough,
-    length, wordsLength,
-    logos], [
-    filter, negativeFilter, merge, mergeReplace, average, insert
+const methods = [[lowerCase, upperCase, title, // case
+    rus2eng, eng2rus, rusByEng, changeLayout, // lang
+    letterCount, toBroken, leed, alphabetID, // replace
+    reverse, reverseWords, upsideDown, // reverse
+    sortSymbols, sortWords, sortByLength, // sort
+    oddSymbols, squareSymbols, removeDublicates, // remove
+    shiftBy1, shiftByMinus1, shiftBy22, // shift
+    base64, toBin, toDec, toHex, to36, toNumber, hash, // convert 
+    abbreviation, typo, strikethrough, // idk
+    length, // lengths
+    logos], [ // images
+    filter, negativeFilter, // filter
+    merge, mergeReplace, // merge
+    average, insert // other
     ]]
 
 console.log(methods[0].length + methods[1].length)
@@ -22,14 +25,18 @@ function formatString(){
     document.querySelector("div").innerHTML = ''
 
     for(let i = 0; i < methods[0].length; i++){
-        document.querySelector("div").innerHTML += `
-        <br><h3>.${methods[0][i].name}()</h3><p>${methods[0][i](string[0])}</p>`
+        if(methods[0][i](string[0]) !== string[0] && string[0].length !== 0 && String(methods[0][i](string[0])).replaceAll(" ", "").length !== 0){
+            document.querySelector("div").innerHTML += `
+            <br><h3>.${methods[0][i].name}()</h3><p>${methods[0][i](string[0])}</p>`
+        }
+
         // console.log(methods[0][i](string))
     }
-    document.querySelector("div").innerHTML += `
-    <input id="string-input-2" placeholder="Second string input"></input><br>
-    <button onclick="formatString()">Submit</button>`
-
+    if(string[0] !== ""){
+        document.querySelector("div").innerHTML += `
+        <input id="string-input-2" placeholder="Second string input"></input><br>
+        <button onclick="formatString()">Submit</button>`
+    }
     if(string[1] !== null){
         if(string[1].value !== ""){
             for(let i = 0; i < methods[1].length; i++){
@@ -43,3 +50,9 @@ function formatString(){
         }
     }
 }
+
+function formatSecondString(){
+    const strings = [document.getElementById("string-input-1").value, document.getElementById("string-input-2")]
+}
+
+addEventListener("input", (event) => {formatString()})
