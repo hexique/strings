@@ -1,16 +1,16 @@
 const methods = [[
-     
+    properties, 
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
     divisiors, factorial, seqSum, // sequences
     digitSum, digitMult, // digits
     nearestPrime, nearestFibonacci, nearestSquare, // nearest
     round, // floats
-    unicode, toRoman, // convert
+    unicode, toRoman, timestamp, // convert
     decToBin, decToHex, decTo36, // to number systems
 
     lowerCase, upperCase, title, // case
-    rus2eng, eng2rus, rusByEng, toJap, changeLayout, // lang
+    rus2eng, eng2rus, rusByEng, fromJap, toJap, changeLayout, // lang
     lettersCount, toBroken, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
@@ -22,6 +22,7 @@ const methods = [[
     length, // lengths
     logos, chemicalSymbol], [ // images
     pow, proportion, // nums
+    split, // string + num
     filter, negativeFilter, // filter
     merge, mergeReplace, // merge
     average, insert // other
@@ -408,9 +409,9 @@ const typoData = {
     "В": "А",
     "Г": "Н",
     "Д": "Л",
-    "Е": "Е",
+    "Е": "Ц",
     "Ё": "Ё",
-    "Ж": "Ж",
+    "Ж": "Э",
     "З": "З",
     "И": "И",
     "Й": "Й",
@@ -425,9 +426,9 @@ const typoData = {
     "Т": "Ь",
     "У": "Ц",
     "Ф": "Ы",
-    "Х": "Щ",
+    "Х": "Ъ",
     "Ц": "Ц",
-    "Ч": "Ч",
+    "Ч": "Я",
     "Ш": "Х",
     "Щ": "Щ",
     "Ъ": "Ъ",
@@ -435,7 +436,7 @@ const typoData = {
     "Ь": "Ь",
     "Э": "Ж",
     "Ю": "Б",
-    "Я": "Я",
+    "Я": "Ч",
 }
 
 const axiusLinkData = {
@@ -789,6 +790,22 @@ function rus2eng(string){
     return replaceByObj(string, rus2engTranslate);
 }
 
+function fromJap(string){
+    string = string.toLowerCase()
+
+    let reversedData = {};
+
+    for(let i = 0; i < Object.entries(japaneseData).length; i++){
+        reversedData[Object.entries(japaneseData)[i][1]] = Object.entries(japaneseData)[i][0]
+    }
+
+    for(let i = 0; i < Object.keys(reversedData).length; i++){
+        string = string.replaceAll(Object.keys(reversedData)[i], Object.values(reversedData)[i])
+    }
+
+    return string
+}
+
 function toJap(string){
     string = rus2eng(string).toLowerCase()
 
@@ -1064,10 +1081,56 @@ function alphabetID(string){
 }
 
 function toMorse(string){
-    return replaceByObj(string, typoData)
+    let result = "";
+
+    for(let i = 0; i < string.length; i++){
+        if(morseData[string[i].toUpperCase()] !== undefined){
+            result += morseData[string[i].toUpperCase()] + " / "
+        }
+    }
+    return result
 }
 
 // nums
+
+function properties(n){
+    console.log("here")
+    if(isNaN(n)) 
+        return
+    n = parseFloat(n)
+
+    let result = [];
+
+    if(n <= 12000000){
+        result.push(`.isPrime(): ${isPrime(n)}`)
+    } 
+    if(n < 100000000000000000000000000000000000) {
+
+        let sequence = [1, 1]
+        while(sequence[sequence.length - 1] < n){
+            sequence.push(sequence[sequence.length - 1] + sequence[sequence.length - 2])
+        }
+        result.push(`.isFibonacci(): ${sequence[sequence.length - 1] === n}`)
+    }
+    result.push(`.isPalindrome(): ${String(n) == reverse(String(n))}`)
+    result.push(`.isSquare(): ${Math.sqrt(n) == Math.floor(Math.sqrt(n))}`)
+    result.push(`.isCubic(): ${Math.cbrt(n) == Math.floor(Math.cbrt(n))}`)
+    result.push(`.isPerfect(): ${[0, 6, 28, 496, 8128, 8589869056, 137438691328, 2305843008139952128].includes(Math.abs(n))}`)
+    let powersOf2 = [1] // alternative method:  parseInt(n - 1).toString(2).replaceAll("1", "") === ""
+    while(Math.abs(n) < powersOf2[powersOf2.length - 1 && n !== 0]){
+        powersOf2.push(powersOf2[powersOf2.length - 1] * 2)
+        console.log(powersOf2)
+    }
+    result.push(`.isPower2(): ${Math.abs(n) === powersOf2[powersOf2.length - 1]}`) 
+
+    // useless props
+    result.push(`.isOdd(): ${n % 2 === 0}`)
+    result.push(`.isNatural(): ${Math.abs(n) == n && n !== 0 && Math.floor(n) == n}`)
+    result.push(`.isPositive(): ${Math.abs(n) === n}`)
+    result.push(`.isInteger(): ${Math.floor(n) === n}`)
+
+    return result.join("<br>")
+}
 
 function square(n){
     if(Math.abs(n) > 1000000000000000 || isNaN(n)) return
@@ -1187,7 +1250,9 @@ function chemicalSymbol(n){
 }
 
 function isPrime(n){
-    if([1, 3, 7, 9].includes(n % 10) && n > 10 && digitSum(String(n)) % 3 != 0 & digitSum(String(n)) % 9 != 0){
+    if(n == 1) return true
+
+    if([1, 3, 7, 9].includes(n % 10) && n > 10 && digitSum(String(n)) % 3 != 0){
         for(let i = 2; i < n; i++){
             if(n % i == 0){
                 return false
@@ -1217,7 +1282,7 @@ function nearestPrime(string){
 
 function nearestFibonacci(n){
     n = Math.abs(parseInt(n))
-    if(n > 100000000000000000000000000000000000 || isNaN(n)) return ""
+    if(n > 100000000000000000000000000000000000 || isNaN(n)) return
 
     let sequence = [1, 1]
     while(sequence[sequence.length - 1] < n){
@@ -1246,21 +1311,19 @@ function nearestSquare(n){
 function divisiors(n){
     n = Math.abs(parseInt(n))
     if(n > 30000000 || isNaN(n)) return
-    let result = "";
+    let result = [];
     let total = 0;
 
-    for(let i = 2; i < n; i++){
+    for(let i = 1; i < n; i++){
         if(n % i == 0){
             total++
-            result += `${i}; `;
+            result.push(i);
         }
     }
 
-    if(total !== 0) result += '<br>'
+    if(result.length <= 1) return `No divisiors.`
         
-    result += `Total divisiors: ${total}`;
-
-    return result
+    return `${result.join("; ")}<br>Sum: ${result.reduce((a, b) => a + b, 0)}<br>Total divisiors: ${result.length}`
 }
 
 function convertFromNumberSys(n, target){
@@ -1344,6 +1407,16 @@ function toRoman(n){
         result += ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][Math.floor(n % 10)]
     }
 
+    return result
+}
+
+function timestamp(n){
+    if(isNaN(n) || n >= 10000000000000000) return
+    n = parseFloat(n)
+    date = new Date(n * 1000)
+
+    const result = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getHours()).padStart(2, '0')}`;
+    console.log(result)
     return result
 }
 
@@ -1457,6 +1530,22 @@ function stringsToInt(nums, maxvalue){
     return result
 }
 
+function split(inputs){
+    let len = inputs[1]
+    if(isNaN(len) || isNaN(parseInt(len))) return
+    len = parseInt(len)
+    let result = ""
+    inputs[0] = inputs[0].replaceAll(" ", "")
+
+    for(let i = 0; i < inputs[0].length; i++){
+        result += inputs[0][i]
+        if((i + 1) % len === 0)
+            result += " "
+    }
+
+    if(result !== inputs[0]) return result
+}
+
 function pow(nums){
     nums = stringsToInt(nums, 10000000000000000000000000)
     if(nums === null){
@@ -1473,22 +1562,7 @@ function proportion(nums){
         return
     }
 
-    for(let i = nums[1]; i > 2; i--){
-        if(nums[0] % i == 0 && nums[1] % i == 0){
-            return `<a class="green">${nums[0]/i}</a>:<a class="red">${nums[1]/i}</a>`
-        }
-    }
-
-    return `<a class="green">${nums[0]}</a>:<a class="red">${nums[1]}</a>`
-}
-
-function potom_dodelat(nums){
-    nums = stringsToInt(nums, 100000000)
-    if(nums === null){
-        return
-    }
-
-    for(let i = nums[1]; i > 2; i--){
+    for(let i = nums[1]; i > 1; i--){
         if(nums[0] % i == 0 && nums[1] % i == 0){
             return `<a class="green">${nums[0]/i}</a>:<a class="red">${nums[1]/i}</a>`
         }

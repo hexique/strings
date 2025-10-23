@@ -17,13 +17,15 @@ function formatString(){
 
         // console.log(methods[0][i].name)
     }
-    if(string[0] !== "" && !isNaN(string[1])){
-        console.log(string[0], "v")
+    
+    if(string[0] !== "" || string[1] == null){
 
         document.getElementById("string-input-container-2").innerHTML = `
+        <p>First string: <b>${string[0]}</b></p>
         <input id="string-input-2" placeholder="Second string input"></input><br>`
 
         document.getElementById("string-input-2").addEventListener("input", (event) => {formatSecondString()})
+        
     } else {
         document.getElementById("string-input-container-2").innerHTML = ``
     }
