@@ -18,18 +18,30 @@ function formatString(){
         // console.log(methods[0][i].name)
     }
     
-    if(string[0] !== "" || string[1] == null){
+    if(string[0] !== ""){ // reset input
+        if(string[1] == null){
+            console.log("v", `"${string[0]}"`, `${string[1] == null}`, `"${string[1]}"`)
 
-        document.getElementById("string-input-container-2").innerHTML = `
-        <p>First string: <b>${string[0]}</b></p>
-        <input id="string-input-2" placeholder="Second string input"></input><br>`
+            document.getElementById("string-input-container-2").innerHTML = `
+            <p>First string:<br><b>${string[0]}</b></p>
+            <input id="string-input-2" placeholder="Second string input"></input><br>`
 
-        document.getElementById("string-input-2").addEventListener("input", (event) => {formatSecondString()})
-        
-    } else {
-        document.getElementById("string-input-container-2").innerHTML = ``
+            document.getElementById("string-input-2").addEventListener("input", (event) => {formatSecondString()})
+        } else if(string[1].value !== ""){ // dont reset
+            formatSecondString()
+        }
+    } else { // hide div, str1 is empty
+        if(string[1].value !== ""){ // dont reset
+            formatSecondString()
+        } else {
+            console.log("x", `"${string[0]}"`, `"${string[1].value}"`)
+            document.getElementById("string-input-container-2").innerHTML = ``
+            document.getElementById("string-output-2").innerHTML = ``
+        }
+
     }
 }
+
 
 function formatSecondString(){
     console.log("formated")
@@ -40,8 +52,7 @@ function formatSecondString(){
     if(strings[1] !== null){
         if(strings[1].value !== ""){
             for(let i = 0; i < methods[1].length; i++){
-                if(methods[1][i]([strings[0], strings[1].value]) !== undefined
-                   && methods[1][i]([strings[0], strings[1].value]) !== null)
+                if(![undefined, null, "", strings[1].value, strings[0].value].includes(methods[1][i]([strings[0], strings[1].value])))
                 document.getElementById("string-output-2").innerHTML += 
 `<br><h3>.${methods[1][i].name}()</h3><p>${methods[1][i]([strings[0], strings[1].value])}</p>`
             }

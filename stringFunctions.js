@@ -1,8 +1,9 @@
 const methods = [[
     properties, 
+    sort,
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
-    divisiors, factorial, seqSum, // sequences
+    divisiors, factorial, seqSum, collatz, // sequences
     digitSum, digitMult, // digits
     nearestPrime, nearestFibonacci, nearestSquare, // nearest
     round, // floats
@@ -14,16 +15,17 @@ const methods = [[
     lettersCount, toBroken, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
-    oddSymbols, squareSymbols, primeSymbols, removeDublicates, // remove
+    oddSymbols, squareSymbols, primeSymbols, // remove
+    removeDublicates, leaveDublicates, 
     shiftBy1, shiftByMinus1, shiftBy22, // shift
     base64, toBin, toDec, toHex, to36, toNumber, hash, // convert 
     fromBin, fromHex, from36, // from number systems
     abbreviation, typo, strikethrough, // idk
     length, // lengths
     logos, chemicalSymbol], [ // images
-    pow, proportion, // nums
-    split, // string + num
-    filter, negativeFilter, // filter
+    pow, proportion, randint, generateFibonacci, // nums
+    split, filterWordsLength, // string + num
+    filter, symbolFilter, negativeSymbolFilter, // filters
     merge, mergeReplace, // merge
     average, insert // other
 ]]
@@ -953,6 +955,18 @@ function removeDublicates(string){
     return result;
 }
 
+function leaveDublicates(string){
+    let result = "";
+    
+    for(let i = 0; i < string.length; i++){
+        if(!result.includes(string[i])) {
+            result += string[i]
+        }
+    }
+
+    return result;
+}
+
 function abbreviation(string){
     let result = "";
     string = string.split(" ")
@@ -1094,7 +1108,6 @@ function toMorse(string){
 // nums
 
 function properties(n){
-    console.log("here")
     if(isNaN(n)) 
         return
     n = parseFloat(n)
@@ -1130,6 +1143,24 @@ function properties(n){
     result.push(`.isInteger(): ${Math.floor(n) === n}`)
 
     return result.join("<br>")
+}
+
+function seqToNum(seq){
+    let result = []
+    for(let i = 0; i < seq.split(" ").length - 1; i++){
+        if(isNaN(seq.split(" ")[i])) 
+            return
+        result.push(parseFloat(seq.split(" ")[i]))
+    }
+    if(result.length <= 1) return
+    return result
+}
+
+function sort(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+
+    return seq.sort((a, b) => {return a - b}).join(" ")
 }
 
 function square(n){
@@ -1194,6 +1225,25 @@ function seqSum(n){
     }
 
     return result
+}
+
+function collatz(n){
+    if(n > 1000000000000000 || isNaN(n)) return
+    n = parseInt(n)
+    let result = []
+    let max = n
+    
+    while (!result.includes(n)){
+        result.push(n)
+        if(n % 2 === 0)
+            n /= 2
+        else{
+            n = n * 3 + 1
+        }
+        if(Math.abs(n) > max) max = Math.abs(n)
+    }
+
+    return result.join(" -&#62 ") + `<br>Total iterations: ${result.length - 1}<br>Max: ${max})`
 }
 
 function digitSum(string){
@@ -1284,7 +1334,7 @@ function nearestFibonacci(n){
     n = Math.abs(parseInt(n))
     if(n > 100000000000000000000000000000000000 || isNaN(n)) return
 
-    let sequence = [1, 1]
+    let sequence = [0, 1]
     while(sequence[sequence.length - 1] < n){
         sequence.push(sequence[sequence.length - 1] + sequence[sequence.length - 2])
     }
@@ -1411,12 +1461,11 @@ function toRoman(n){
 }
 
 function timestamp(n){
-    if(isNaN(n) || n >= 10000000000000000) return
+    if(isNaN(n) || 10000 > n >= 10000000000000000) return
     n = parseFloat(n)
     date = new Date(n * 1000)
 
     const result = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getHours()).padStart(2, '0')}`;
-    console.log(result)
     return result
 }
 
@@ -1460,26 +1509,41 @@ function average(strings){
 
 function filter(strings){
     let result = "";
+    result = strings[0].replaceAll(strings[1], "")
+
+    if (result === strings[0]) return
+
+    return `<a class="green">${result}</a>`;
+}
+
+function symbolFilter(strings){
+    let result = "";
+    let isCopy = true;
 
     for (var i = 0; i < strings[0].length; i++) {
         if(!strings[1].includes(strings[0][i])){
             result += `<a class="green">${strings[0][i]}</a>`
+        } else {
+            isCopy = false
         }
     }
 
-    return result;
+    if(isCopy) return result;
 }
 
-function negativeFilter(strings){
+function negativeSymbolFilter(strings){
     let result = "";
+    let isCopy = true;
 
     for (var i = 0; i < strings[0].length; i++) {
         if(strings[1].includes(strings[0][i])){
             result += `<a class="red">${strings[0][i]}</a>`
+        } else {
+            isCopy = false
         }
     }
 
-    return result;
+    if(isCopy) return result;
 }
 
 function insert(strings){
@@ -1510,6 +1574,40 @@ function mergeReplace(strings){
     return result;
 }
 
+// str + num
+
+function split(inputs){
+    let len = inputs[1]
+    if(isNaN(len) || isNaN(parseInt(len))) return
+    len = parseInt(len)
+    let result = ""
+    inputs[0] = inputs[0].replaceAll(" ", "")
+
+    for(let i = 0; i < inputs[0].length; i++){
+        result += inputs[0][i]
+        if((i + 1) % len === 0)
+            result += " "
+    }
+
+    if(result !== inputs[0]) return result
+}
+
+function filterWordsLength(inputs){
+    let len = inputs[1]
+    if(isNaN(len) || isNaN(parseInt(len))) return
+    len = parseInt(len)
+
+    return inputs[0]
+    .split(" ").join(".")
+    .split(".").join(",")
+    .split(",").join(";")
+    .split(";").join("?")
+    .split("?").join("!")
+    .split("!")
+    .filter((word) => word.length === len)
+    .join(" ")
+}
+
 // nums
 
 function stringsToInt(nums, maxvalue){
@@ -1530,22 +1628,6 @@ function stringsToInt(nums, maxvalue){
     return result
 }
 
-function split(inputs){
-    let len = inputs[1]
-    if(isNaN(len) || isNaN(parseInt(len))) return
-    len = parseInt(len)
-    let result = ""
-    inputs[0] = inputs[0].replaceAll(" ", "")
-
-    for(let i = 0; i < inputs[0].length; i++){
-        result += inputs[0][i]
-        if((i + 1) % len === 0)
-            result += " "
-    }
-
-    if(result !== inputs[0]) return result
-}
-
 function pow(nums){
     nums = stringsToInt(nums, 10000000000000000000000000)
     if(nums === null){
@@ -1553,11 +1635,10 @@ function pow(nums){
     }
 
     return Math.pow(nums[0], nums[1])
-
 }
 
 function proportion(nums){
-    nums = stringsToInt(nums, 100000000)
+    nums = stringsToInt(nums, 1000000)
     if(nums === null){
         return
     }
@@ -1569,4 +1650,24 @@ function proportion(nums){
     }
 
     return `<a class="green">${nums[0]}</a>:<a class="red">${nums[1]}</a>`
+}
+
+function generateFibonacci(nums){
+    nums = stringsToInt(nums, 100000000)
+    if(nums === null) return
+    
+    const LENGTH_LIMIT = 50
+
+    for(let i = 0; i < LENGTH_LIMIT; i++){
+        nums.push(nums[nums.length - 1] + nums[nums.length - 2])
+    }
+
+    return nums.join("; ")
+}
+
+function randint(nums){
+    nums = stringsToInt(nums, 100000000)
+    if(nums === null) return
+
+    return Math.floor(Math.random() * (nums[1] + 1 - nums[0])) + nums[0]
 }
