@@ -1,4 +1,4 @@
-console.log(methods[0].length + methods[1].length)
+console.log(`totla methods: ${methods[0].length + methods[1].length}`)
 
 changeTitle("strings")
 
@@ -14,16 +14,14 @@ function formatString(){
             document.getElementById("string-output-1").innerHTML += `
             <br><h3>.${methods[0][i].name}()</h3><p>${methods[0][i](string[0])}</p>`
         }
-
         // console.log(methods[0][i].name)
     }
+
+    document.getElementById("string-output-1").innerHTML += `<p id="first-str-display">First string:<br><b>${string[0]}</b></p>`
     
     if(string[0] !== ""){ // reset input
         if(string[1] == null){
-            console.log("v", `"${string[0]}"`, `${string[1] == null}`, `"${string[1]}"`)
-
             document.getElementById("string-input-container-2").innerHTML = `
-            <p>First string:<br><b>${string[0]}</b></p>
             <input id="string-input-2" placeholder="Second string input"></input><br>`
 
             document.getElementById("string-input-2").addEventListener("input", (event) => {formatSecondString()})
@@ -31,21 +29,18 @@ function formatString(){
             formatSecondString()
         }
     } else { // hide div, str1 is empty
-        if(string[1].value !== ""){ // dont reset
+        if(string[1].value !== ""){ // dont reset, str1 is empty, str2 isnt empty
             formatSecondString()
         } else {
-            console.log("x", `"${string[0]}"`, `"${string[1].value}"`)
             document.getElementById("string-input-container-2").innerHTML = ``
-            document.getElementById("string-output-2").innerHTML = ``
         }
+        document.getElementById("string-output-2").innerHTML = ``
 
     }
 }
 
 
 function formatSecondString(){
-    console.log("formated")
-
     const strings = [document.getElementById("string-input-1").value, document.getElementById("string-input-2")]
     document.getElementById("string-output-2").innerHTML = "";
 

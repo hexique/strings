@@ -1,6 +1,7 @@
 const methods = [[
     properties, 
-    sort,
+    sort, reverseSeq, sum, shuffle, // lists
+    minMax, average, median, listLength, // singe num
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
     divisiors, factorial, seqSum, collatz, // sequences
@@ -27,7 +28,7 @@ const methods = [[
     split, filterWordsLength, // string + num
     filter, symbolFilter, negativeSymbolFilter, // filters
     merge, mergeReplace, // merge
-    average, insert // other
+    averageString, insert // other
 ]]
 
 function changeTitle(string){
@@ -411,31 +412,31 @@ const typoData = {
     "В": "А",
     "Г": "Н",
     "Д": "Л",
-    "Е": "Ц",
+    "Е": "Н",
     "Ё": "Ё",
     "Ж": "Э",
-    "З": "З",
-    "И": "И",
+    "З": "Щ",
+    "И": "М",
     "Й": "Й",
-    "К": "У",
-    "Л": "Л",
-    "М": "М",
-    "Н": "И",
+    "К": "К",
+    "Л": "Д",
+    "М": "И",
+    "Н": "Г",
     "О": "Л",
-    "П": "Р",
+    "П": "П",
     "Р": "П",
-    "С": "С",
+    "С": "Ч",
     "Т": "Ь",
     "У": "Ц",
     "Ф": "Ы",
     "Х": "Ъ",
     "Ц": "Ц",
     "Ч": "Я",
-    "Ш": "Х",
-    "Щ": "Щ",
+    "Ш": "Г",
+    "Щ": "З",
     "Ъ": "Ъ",
     "Ы": "Ф",
-    "Ь": "Ь",
+    "Ь": "Б",
     "Э": "Ж",
     "Ю": "Б",
     "Я": "Ч",
@@ -1012,18 +1013,23 @@ function getDivisiors(n){
 
 function typo(string){
     let result = "";
+    const seed = String(Math.abs(hash(string))).repeat(Math.floor(string.length / 8))
 
     for(let i = 0; i < string.length; i++){
-        if(getDivisiors(i).length == 2){
+        if(parseInt(seed[i]) > 4){
             if(typoData[string[i]] !== undefined){
                 result += typoData[string[i]]
+                // result += `<a class="red">${typoData[string[i]]}</a>`
             } else if(typoData[string[i].toUpperCase()] !== undefined){
                 result += typoData[string.toUpperCase()[i]].toLowerCase()
+                // result += `<a class="red">${typoData[string.toUpperCase()[i]].toLowerCase()}</a>`
             } else {
                 result += string[i]
+                // result += `<a class="red">${string[i]}</a>`
             }
         } else {
             result += string[i]
+            // result += `<a class="green">${string[i]}</a>`
         }
     }
     return result
@@ -1137,7 +1143,7 @@ function properties(n){
     result.push(`.isPower2(): ${Math.abs(n) === powersOf2[powersOf2.length - 1]}`) 
 
     // useless props
-    result.push(`.isOdd(): ${n % 2 === 0}`)
+    result.push(`.isEven(): ${n % 2 === 0}`)
     result.push(`.isNatural(): ${Math.abs(n) == n && n !== 0 && Math.floor(n) == n}`)
     result.push(`.isPositive(): ${Math.abs(n) === n}`)
     result.push(`.isInteger(): ${Math.floor(n) === n}`)
@@ -1147,10 +1153,10 @@ function properties(n){
 
 function seqToNum(seq){
     let result = []
-    for(let i = 0; i < seq.split(" ").length - 1; i++){
-        if(isNaN(seq.split(" ")[i])) 
+    for(let i = 0; i < seq.split("; ").join(" ").split(" ").length; i++){
+        if(isNaN(seq.split("; ").join(" ").split(" ")[i])) 
             return
-        result.push(parseFloat(seq.split(" ")[i]))
+        result.push(parseFloat(seq.split("; ").join(" ").split(" ")[i]))
     }
     if(result.length <= 1) return
     return result
@@ -1162,6 +1168,70 @@ function sort(seq){
 
     return seq.sort((a, b) => {return a - b}).join(" ")
 }
+
+function reverseSeq(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+    return seq.reverse().join("; ")
+}
+
+function shuffle(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+
+    let result = []
+    const LENGTH = seq.length
+    for(let i = 0; i < LENGTH; i++){
+        let index = Math.floor(Math.random() * seq.length)
+        result.push(seq[index])
+        seq.splice(index, 1)
+    }
+    return result.join("; ")
+}
+
+function sum(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+
+    let result = 0
+    seq.forEach((n) => {result += n})
+    return result
+}
+
+function minMax(seq){
+    let sortedSeq = seqToNum(seq)
+    if(!sortedSeq) return
+    sortedSeq = sortedSeq.sort((a, b) => {return a - b})
+
+    return `<a class="gray" title="min">${sortedSeq[0]}</a>; <a class="gray" title="max">${sortedSeq[sortedSeq.length - 1]}</a>; `
+}
+
+function average(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+
+    return seq.reduce((partialSum, a) => partialSum + a, 0) / seq.length
+}
+
+function median(seq){
+    seq = sort(seq)
+    if(!seq) return
+    seq = seq.split(" ").join("; ").split("; ")
+
+    if(seq.length % 2 == 0){
+        return (parseFloat(seq[seq.length / 2 - 1]) + parseFloat(seq[seq.length / 2])) / 2
+    } else {
+        return seq[(seq.length - 1) / 2]
+    }
+}
+
+function listLength(seq){
+    seq = seqToNum(seq)
+    if(!seq) return
+
+    return seq.length
+}
+
 
 function square(n){
     if(Math.abs(n) > 1000000000000000 || isNaN(n)) return
@@ -1491,7 +1561,7 @@ function merge(strings){
     return result;
 }
 
-function average(strings){
+function averageString(strings){
     let result = "";
     strings = sortStrings(strings)
 
@@ -1511,39 +1581,33 @@ function filter(strings){
     let result = "";
     result = strings[0].replaceAll(strings[1], "")
 
-    if (result === strings[0]) return
+    if (result === strings[0] || result === "") return
 
     return `<a class="green">${result}</a>`;
 }
 
 function symbolFilter(strings){
     let result = "";
-    let isCopy = true;
 
     for (var i = 0; i < strings[0].length; i++) {
         if(!strings[1].includes(strings[0][i])){
-            result += `<a class="green">${strings[0][i]}</a>`
-        } else {
-            isCopy = false
+            result += strings[0][i]
         }
     }
 
-    if(isCopy) return result;
+    if(result != strings[0] || result !== "") return `<a class="green">${result}</a>`;
 }
 
 function negativeSymbolFilter(strings){
     let result = "";
-    let isCopy = true;
 
     for (var i = 0; i < strings[0].length; i++) {
         if(strings[1].includes(strings[0][i])){
-            result += `<a class="red">${strings[0][i]}</a>`
-        } else {
-            isCopy = false
+            result += strings[0][i]
         }
     }
 
-    if(isCopy) return result;
+    if(result != strings[0] || result !== "") return `<a class="red">${result}</a>`;
 }
 
 function insert(strings){
