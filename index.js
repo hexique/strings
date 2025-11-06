@@ -33,6 +33,7 @@ function formatString(){
             formatSecondString()
         } else {
             document.getElementById("string-input-container-2").innerHTML = ``
+            document.getElementById("string-output-1").innerHTML = ''
         }
         document.getElementById("string-output-2").innerHTML = ``
 

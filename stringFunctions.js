@@ -2,6 +2,7 @@ const methods = [[
     properties, 
     sort, reverseSeq, sum, shuffle, // lists
     minMax, average, median, listLength, // singe num
+
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
     divisiors, factorial, seqSum, collatz, // sequences
@@ -13,17 +14,18 @@ const methods = [[
 
     lowerCase, upperCase, title, // case
     rus2eng, eng2rus, rusByEng, fromJap, toJap, changeLayout, // lang
-    lettersCount, toBroken, leed, alphabetID, toMorse, // replace
+    lettersCount, wordsCount, // count
+    toBroken, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
     oddSymbols, squareSymbols, primeSymbols, // remove
-    removeDublicates, leaveDublicates, 
+    removeDublicates, leaveDublicates, // dublicates
     shiftBy1, shiftByMinus1, shiftBy22, // shift
     base64, toBin, toDec, toHex, to36, toNumber, hash, // convert 
     fromBin, fromHex, from36, // from number systems
     abbreviation, typo, strikethrough, // idk
-    length, // lengths
-    logos, chemicalSymbol], [ // images
+    replaceWithLength, length, // lengths
+    logos, dancingLetters, chemicalSymbol], [ // images
     pow, proportion, randint, generateFibonacci, // nums
     split, filterWordsLength, // string + num
     filter, symbolFilter, negativeSymbolFilter, // filters
@@ -273,48 +275,6 @@ const alphabetIdData = [
     ["Л", "M"], ["М", "N"], ["Н", "O"], ["О", "P"], ["П", "Q"], ["Р", "R"], ["С", "S"], ["Т", "T"], ["У", "U"], ["Ф", "V"], ["Х", "W"], ["Ц", "X"],
     ["Ш", "Y"], ["Щ", "Z"], ["Ъ", ""], ["Ы", ""], ["Ь", ""], ["Э", ""], ["Ю", ""], ["Я", ""]
 ]
-
-const logosData = {
-    " ": "https://tedmontgomery.com/tutorial/graphics/white.gif",
-
-    "A": "https://cdn.worldvectorlogo.com/logos/adobe-2.svg",
-    "B": "https://cdn.worldvectorlogo.com/logos/bitcoin.svg",
-    "C": "https://cdn.worldvectorlogo.com/logos/c-1.svg",
-    "D": "https://cdn.worldvectorlogo.com/logos/disqus-1.svg",
-    "E": "https://cdn.worldvectorlogo.com/logos/internet-explorer-4.svg",
-    "F": "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
-    "G": "https://cdn.worldvectorlogo.com/logos/google-g-2015.svg",
-    "H": "https://cdn.worldvectorlogo.com/logos/half-life-2-1.svg",
-    "I": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F1c%2Fc9%2F26%2F1cc92622eef44ae702803ab86800b696.png&f=1&nofb=1&ipt=29d11af185e917cd08182936f58bfceefbed15cf322a4e8febbffb044bb2502b",
-    "J": "https://cdn.worldvectorlogo.com/logos/juventus-futebol-clube-da-barra-do-ribeiro-rs.svg",
-    "K": "https://cdn.worldvectorlogo.com/logos/kotlin.svg", //https://cdn.worldvectorlogo.com/logos/kotlin-1.svg
-    "L": "https://cdn.worldvectorlogo.com/logos/laravel-1.svg",
-    "M": "https://cdn.worldvectorlogo.com/logos/mcdonalds-5.svg",
-    "N": "https://cdn.worldvectorlogo.com/logos/netflix-logo-icon.svg",
-    "O": "https://cdn.worldvectorlogo.com/logos/opera-2.svg",
-    "P": "https://cdn.worldvectorlogo.com/logos/pinterest-3.svg",
-    "Q": "https://cdn.worldvectorlogo.com/logos/qfx.svg",
-    "R": "https://cdn.worldvectorlogo.com/logos/rockstar-games.svg",
-    "S": "https://cdn.worldvectorlogo.com/logos/skype-icon.svg",
-    "T": "https://cdn.worldvectorlogo.com/logos/tumblr-icon-1.svg",
-    "U": "https://cdn.worldvectorlogo.com/logos/unreal-1.svg",
-    "V": "https://cdn.worldvectorlogo.com/logos/vimeo-icon-blue.svg",
-    "W": "https://cdn.worldvectorlogo.com/logos/volkswagen-7.svg",
-    "X": "https://cdn.worldvectorlogo.com/logos/x-2.svg",
-    "Y": "https://cdn.worldvectorlogo.com/logos/yahoo-icon.svg",
-    "Z": "https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg",
-
-    "0": "https://cdn.worldvectorlogo.com/logos/opera-14.svg",
-    "1": "https://www.svgrepo.com/show/381003/google-logo-one-new.svg",
-    "2": "https://cdn.worldvectorlogo.com/logos/fox-2-1.svg",
-    "3": "https://cdn.worldvectorlogo.com/logos/radio-3.svg",
-    "4": "https://cdn.worldvectorlogo.com/logos/rete-4-2.svg",
-    "5": "https://cdn.worldvectorlogo.com/logos/html-1.svg",
-    "6": "https://cdn.worldvectorlogo.com/logos/sbs-6-1.svg",
-    "7": "https://cdn.worldvectorlogo.com/logos/7-eleven-logo-1.svg",
-    "8": "https://cdn.worldvectorlogo.com/logos/ios-8-1.svg",
-    "9": "https://cdn.worldvectorlogo.com/logos/9-tv.svg",
-}
 
 const upsideDownData = {
     " ": " ",
@@ -637,6 +597,90 @@ const morseData = {
 
 }
 
+const logosData = {
+    " ": "img/blank.png",
+
+    "A": "https://cdn.worldvectorlogo.com/logos/adobe-2.svg",
+    "B": "https://cdn.worldvectorlogo.com/logos/bitcoin.svg",
+    "C": "https://cdn.worldvectorlogo.com/logos/c-1.svg",
+    "D": "https://cdn.worldvectorlogo.com/logos/disqus-1.svg",
+    "E": "https://cdn.worldvectorlogo.com/logos/internet-explorer-4.svg",
+    "F": "https://cdn.worldvectorlogo.com/logos/facebook-3-2.svg",
+    "G": "https://cdn.worldvectorlogo.com/logos/google-g-2015.svg",
+    "H": "https://cdn.worldvectorlogo.com/logos/half-life-2-1.svg",
+    "I": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F1c%2Fc9%2F26%2F1cc92622eef44ae702803ab86800b696.png&f=1&nofb=1&ipt=29d11af185e917cd08182936f58bfceefbed15cf322a4e8febbffb044bb2502b",
+    "J": "https://cdn.worldvectorlogo.com/logos/juventus-futebol-clube-da-barra-do-ribeiro-rs.svg",
+    "K": "https://cdn.worldvectorlogo.com/logos/kotlin.svg", //https://cdn.worldvectorlogo.com/logos/kotlin-1.svg
+    "L": "https://cdn.worldvectorlogo.com/logos/laravel-1.svg",
+    "M": "https://cdn.worldvectorlogo.com/logos/mcdonalds-5.svg",
+    "N": "https://cdn.worldvectorlogo.com/logos/netflix-logo-icon.svg",
+    "O": "https://cdn.worldvectorlogo.com/logos/opera-2.svg",
+    "P": "https://cdn.worldvectorlogo.com/logos/pinterest-3.svg",
+    "Q": "https://cdn.worldvectorlogo.com/logos/qfx.svg",
+    "R": "https://cdn.worldvectorlogo.com/logos/rockstar-games.svg",
+    "S": "https://cdn.worldvectorlogo.com/logos/skype-icon.svg",
+    "T": "https://cdn.worldvectorlogo.com/logos/tumblr-icon-1.svg",
+    "U": "https://cdn.worldvectorlogo.com/logos/unreal-1.svg",
+    "V": "https://cdn.worldvectorlogo.com/logos/vimeo-icon-blue.svg",
+    "W": "https://cdn.worldvectorlogo.com/logos/volkswagen-7.svg",
+    "X": "https://cdn.worldvectorlogo.com/logos/x-2.svg",
+    "Y": "https://cdn.worldvectorlogo.com/logos/yahoo-icon.svg",
+    "Z": "https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg",
+
+    "0": "https://cdn.worldvectorlogo.com/logos/opera-14.svg",
+    "1": "https://www.svgrepo.com/show/381003/google-logo-one-new.svg",
+    "2": "https://cdn.worldvectorlogo.com/logos/fox-2-1.svg",
+    "3": "https://cdn.worldvectorlogo.com/logos/radio-3.svg",
+    "4": "https://cdn.worldvectorlogo.com/logos/rete-4-2.svg",
+    "5": "https://cdn.worldvectorlogo.com/logos/html-1.svg",
+    "6": "https://cdn.worldvectorlogo.com/logos/sbs-6-1.svg",
+    "7": "https://cdn.worldvectorlogo.com/logos/7-eleven-logo-1.svg",
+    "8": "https://cdn.worldvectorlogo.com/logos/ios-8-1.svg",
+    "9": "https://cdn.worldvectorlogo.com/logos/9-tv.svg",
+}
+
+const gifsData = {
+    " ": "img/blank.png",
+
+    "A": "https://media.tenor.com/TEnSmPnJnoYAAAAj/capital-letter-dancing-letter.gif",
+    "B": "https://media.tenor.com/9O04NZhF6xgAAAAm/dancing-letter-letter-b.webp",
+    "C": "https://media.tenor.com/mWynSjEjY-kAAAAm/dancing-letter-letter-c.webp",
+    "D": "https://media.tenor.com/EXVZaqMH6HIAAAAm/dancing-letter-letter-d.webp",
+    "E": "https://media.tenor.com/A5a-G4IqGOQAAAAm/dancing-letter-letter-e.webp",
+    "F": "https://media.tenor.com/-ULybTB8w90AAAAm/dancing-letter-letter-f.webp",
+    "G": "https://media.tenor.com/WuG5qhJkNU8AAAAm/dancing-letter-letter-g.webp",
+    "H": "https://media.tenor.com/z2mfuzgIZoMAAAAm/dancing-letter-letter-h.webp",
+    "I": "https://media.tenor.com/bKYqRGJaA3QAAAAm/dancing-letter-letter-i.webp",
+    "J": "https://media.tenor.com/xUZ8mgiaB1sAAAAm/dancing-letter-letter-j.webp",
+    "K": "https://media.tenor.com/LmhxtfZD95IAAAAj/dancing-letter-letter.gif",
+    "L": "https://media.tenor.com/KCCTDua2SkoAAAAj/dancing-letter-letter.gif",
+    "M": "https://media.tenor.com/9xKDH0AzlxMAAAAj/dancing-letter-letter.gif",
+    "N": "https://media.tenor.com/x6G5QCNemMkAAAAj/dancing-letter-letter.gif",
+    "O": "https://media.tenor.com/dkCwZF-ltCQAAAAj/dancing-letter-letter.gif",
+    "P": "https://media.tenor.com/i9amW8b9cLgAAAAj/dancing-letter-letter.gif",
+    "Q": "https://media.tenor.com/pAJnrmJuUHIAAAAj/dancing-letter-letter.gif",
+    "R": "https://media.tenor.com/C24-QePdofIAAAAm/dancing-letter-letter.webp",
+    "S": "https://media.tenor.com/IQQVfdxyOIQAAAAj/dancing-letter-letter.gif",
+    "T": "https://media.tenor.com/4A0Nel-xOFYAAAAj/dancing-letter-letter.gif",
+    "U": "https://media.tenor.com/aZgRQ_r4lTsAAAAj/capital-letter-letter.gif",
+    "V": "https://media.tenor.com/Qn63ZuRwp5EAAAAi/capital-letter-letter.gif",
+    "W": "https://media.tenor.com/ANut9Jv7_fwAAAAj/capital-letter-letter.gif",
+    "X": "https://media.tenor.com/TolydnT8A5QAAAAi/capital-letter-dancing-letter.gif",
+    "Y": "https://media.tenor.com/9zMHtfQLsjUAAAAj/capital-letter-letter.gif",
+    "Z": "https://media.tenor.com/dzk8rnKO_AUAAAAj/capital-letter-letter.gif",
+
+    "0": "https://media.tenor.com/DtNdi4Bzj_UAAAAm/dancing-number-dancing-letter.webp",
+    "1": "https://media.tenor.com/GvP7L0FwFyMAAAAm/dancing-number-dancing-letter.webp",
+    "2": "https://media.tenor.com/J-MYuLM6fXUAAAAm/dancing-number-dancing-letter.webp",
+    "3": "https://media.tenor.com/o96-hgLmCQ0AAAAm/dancing-number-dancing-letter.webp",
+    "4": "https://media.tenor.com/G4W1KBzAoQsAAAAm/dancing-number-dancing-letter.webp",
+    "5": "https://media.tenor.com/JD-y9a5fHBsAAAAm/dancing-number-dancing-letter.webp",
+    "6": "https://media.tenor.com/Vj1qjksWYvcAAAAm/dancing-number-dancing-letter.webp",
+    "7": "https://media.tenor.com/6-3dxjy6qSMAAAAm/dancing-number-dancing-letter.webp",
+    "8": "https://media.tenor.com/d3HlvsnflX0AAAAm/dancing-number-dancing-letter.webp",
+    "9": "https://media.tenor.com/i0x1-y8QubAAAAAm/dancing-number-dancing-letter.webp", // thx tenor user wjirc
+}
+
 function saveHTML(string){
     return String(string).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
@@ -757,6 +801,18 @@ function logos(string){
     return result
 }
 
+function dancingLetters(string){
+    result = "";
+    string = rus2eng(string.toUpperCase());
+
+    for(let i = 0; i < string.length; i++){
+        if(logosData[string[i]] !== undefined){
+            result += `<img src="${gifsData[string[i]]}" width="50" height="50" alt="${string[i]}" title="${string[i]}">`
+        }
+    }
+    return result
+}
+
 function toBin(string) {
     return convertToNumberSys(string, 2);
 }
@@ -864,6 +920,29 @@ function lettersCount(string){
     for(let i = 0; i < Object.keys(result).length; i++){
         output = `${output} ${Object.keys(result)[i]}: ${result[Object.keys(result)[i]]},`
     }
+
+    return output;
+}
+
+function wordsCount(string){
+    var result = {};
+    var output = '';
+
+    for(let i = 0; i < string.split(" ").length; i++){
+        if(Object.keys(result).includes(string[i])) {
+            result[string.split(" ")[i]] += 1;
+        } else {
+            result[string.split(" ")[i]] = 1;
+        }
+    }
+
+    result = Object.fromEntries(Object.entries(result).sort(([, valueA], [, valueB]) => valueA - valueB).reverse());
+
+    for(let i = 0; i < Object.keys(result).length; i++){
+        output = `${output} ${Object.keys(result)[i]}: ${result[Object.keys(result)[i]]},`
+    }
+
+    if(Object.values(result)[0] <= 2) return
 
     return output;
 }
@@ -976,6 +1055,17 @@ function abbreviation(string){
         if(string[i].length > 0){
             result += string[i][0].toUpperCase() + "."
         }
+    }
+
+    return result;
+}
+
+function replaceWithLength(string) {
+    let result = "";
+
+    for (let i = 0; i < string.split(" ").length; i++) {
+        result += `<a class="gray" title="${string.split(" ")[i]}">${string.split(" ")[i].length}</a> `
+        console.log(result)
     }
 
     return result;
@@ -1414,17 +1504,11 @@ function nearestFibonacci(n){
 
 function nearestSquare(n){
     if(n > 100000000000000000 || isNaN(n) ) return
-    n = Math.abs(parseInt(n))
-    if(isNaN(n)) return
-
-    for(let i = 1; true; i++){
-        if(i * i >= n){
-            if(Math.abs(n - (i - 1) * (i - 1)) > Math.abs(n - i * i) ){
-                return String(i * i) + "<a></a>"
-            } else {
-                return String((i - 1) * (i - 1)) + "<a></a>"
-            }
-        }
+    n = parseInt(n)
+    if(n > 0){
+        return Math.pow(Math.round(Math.sqrt(n)), 2)
+    } else {
+        return 0
     }
 }
 
