@@ -1,8 +1,8 @@
 const methods = [[
     properties, 
-    sort, reverseSeq, sum, shuffle, // lists
-    minMax, average, median, listLength, // singe num
+    sort, reverseSeq, sum, // lists
 
+    minMax, average, median, // num
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
     divisiors, factorial, seqSum, collatz, // sequences
@@ -12,22 +12,27 @@ const methods = [[
     unicode, toRoman, timestamp, // convert
     decToBin, decToHex, decTo36, // to number systems
 
-    lowerCase, upperCase, title, // case
-    rus2eng, eng2rus, rusByEng, fromJap, toJap, changeLayout, // lang
+    fromBroken, fromJap, // from
+    lowerCase, upperCase, title, invertCase, // case
+    rus2eng, eng2rus, rusByEng, toJap, changeLayout, // lang
     lettersCount, wordsCount, // count
     toBroken, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
     oddSymbols, squareSymbols, primeSymbols, // remove
     removeDublicates, leaveDublicates, // dublicates
+    shuffle, shuffleLetters, // shuffle
     shiftBy1, shiftByMinus1, shiftBy22, // shift
     base64, toBin, toDec, toHex, to36, toNumber, hash, // convert 
     fromBin, fromHex, from36, // from number systems
-    abbreviation, typo, strikethrough, // idk
+    abbreviation, typo, // idk
+    strikethrough, bold, fraktur, // 
     replaceWithLength, length, // lengths
-    logos, dancingLetters, chemicalSymbol], [ // images
+    periodicElements, // chemistry
+    periodicElement, logos, dancingLetters], [ // images
     pow, proportion, randint, generateFibonacci, // nums
     split, filterWordsLength, // string + num
+
     filter, symbolFilter, negativeSymbolFilter, // filters
     merge, mergeReplace, // merge
     averageString, insert // other
@@ -171,8 +176,34 @@ const leedTranslate = {
 const brokenLettersData = {
     " ": " ",
 
+    "A": "α",
+    "B": "ƅ",
+    "C": "Ҁ",
+    "D": "ⅠↃ",
+    "E": "∑",
+    "F": "Ϝ",
+    "G": "ɠ",
+    "H": "λ",
+    "I": "ⅰ",
+    "K": "⇃≺",
+    "L": "Ł",
+    "M": "ʍ",
+    "N": "η",
+    "O": "○",
+    "P": "₽",
+    "Q": "ʠ",
+    "R": "Ř",
+    "S": "⫓",
+    "T": "⊤",
+    "U": "ʊ",
+    "V": "Ⅴ",
+    "W": "Ŵ",
+    "X": "⨉",
+    "Y": "ʏ",
+    "Z": "ｚ",
+
     "А": "α",
-    "Б": "6",
+    "Б": "ƃ",
     "В": "Ⅰ⫖",
     "Г": "Γ",
     "Д": "Δ",
@@ -180,14 +211,14 @@ const brokenLettersData = {
     "Ё": "∑",
     "Ж": "≻∣≺",
     "З": "∃",
-    "И": "U",
+    "И": "υ",
     "Й": "ŭ",
     "К": "⇃≺",
     "Л": "⩘",
     "М": "ʍ",
     "Н": "Ⅰ−Ⅰ",
     "О": "○",
-    "П": "∏",
+    "П": "π",
     "Р": "₽",
     "С": "Ҁ",
     "Т": "⊤",
@@ -197,39 +228,13 @@ const brokenLettersData = {
     "Ц": "Ꚏ",
     "Ч": "ӵ",
     "Ш": "ɯ",
-    "Щ": "ɯ.",
+    "Щ": "ɰ",
     "Ъ": "Ꙏ",
     "Ы": "Ꙑ",
-    "Ь": "b",
+    "Ь": "ɓ",
     "Э": "Ӭ",
     "Ю": "Ꙕ",
     "Я": "Ԙ",
-    
-    "A": "α",
-    "B": "Ⅰ⫖",
-    "C": "Ҁ",
-    "D": "ⅠↃ",
-    "E": "∑",
-    "F": "Ⅰ⇉",
-    "G": "ɠ",
-    "H": "Ⅰ−Ⅰ",
-    "I": "Ⅰ",
-    "K": "⇃≺",
-    "L": "Ł",
-    "M": "ʍ",
-    "N": "Ñ",
-    "O": "○",
-    "P": "₽",
-    "Q": "ʠ",
-    "R": "Ř",
-    "S": "⫓",
-    "T": "⊤",
-    "U": "∐",
-    "V": "Ⅴ",
-    "W": "Ŵ",
-    "X": "⨉",
-    "Y": "ʏ",
-    "Z": "ｚ",
 }
 
 const rusByEngData = {
@@ -550,8 +555,8 @@ const japaneseData = {
     "v": "ゔ",
 }
 
-const periodicElements = [
-    "H (Hydrogen)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/d/d9/Hydrogenglow.jpg\" width=\"200\" alt=\"Hydrogen\">", "He (Helium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/00/Helium-glow.jpg\" width=\"200\" alt=\"Helium\">", "Li (Lithium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/e2/0.5_grams_lithium_under_argon.jpg\" width=\"200\" alt=\"Lithium\">", "Be (Beryllium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/e2/Beryllium_%28Be%29.jpg\" width=\"200\" alt=\"Beryllium\">", "B (Boron)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a2/Boron.jpg\" width=\"200\" alt=\"Boron\">", "C (Carbon)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/68/Pure_Carbon.png\" width=\"200\" alt=\"Carbon\">", "N (Nitrogen)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/2d/Nitrogen-glow.jpg\" width=\"200\" alt=\"Nitrogen\">", "O (Oxygen)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a0/Liquid_oxygen_in_a_beaker_%28cropped_and_retouched%29.jpg\" width=\"200\" alt=\"Oxygen\">", "F (Fluorine)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/2c/Fluoro_liquido_a_-196%C2%B0C_1.jpg\" width=\"200\" alt=\"Fluorine\">", "Ne (Neon)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f8/Neon-glow.jpg\" width=\"200\" alt=\"Neon\">", "Na (Sodium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/27/Na_%28Sodium%29.jpg\" width=\"200\" alt=\"Sodium\">", "Mg (Magnesium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/3/3f/Magnesium_crystals.jpg\" width=\"200\" alt=\"Magnesium\">", "Al (Aluminium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/3/3e/Aluminium.jpg\" width=\"200\" alt=\"Aluminium\">", "Si (Silicon)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/2c/Silicon.jpg\" width=\"200\" alt=\"Silicon\">", "P (Phosphorus)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6d/Phosphorus-purple.jpg\" width=\"200\" alt=\"Phosphorus\">", "S (Sulfur)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/23/Native_sulfur_%28Vodinskoe_Deposit%3B_quarry_near_Samara%2C_Russia%29_9.jpg\" width=\"200\" alt=\"Sulfur\">", "Cl (Chlorine)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/9/9a/Chlorine-sample-flip.jpg\" width=\"200\" alt=\"Chlorine\">", "Ar (Argon)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/53/Argon-glow.jpg\" width=\"200\" alt=\"Argon\">", "K (Potassium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b3/Potassium.JPG\" width=\"200\" alt=\"Potassium\">", "Ca (Calcium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/7/72/Calcium.jpg\" width=\"200\" alt=\"Calcium\">", "Sc (Scandium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f5/Scandium%2C_Sc.jpg\" width=\"200\" alt=\"Scandium\">", "Ti (Titanium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/ec/Titanium.jpg\" width=\"200\" alt=\"Titanium\">", "V (Vanadium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/0a/Vanadium-pieces.jpg\" width=\"200\" alt=\"Vanadium\">", "Cr (Chromium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a1/Chromium.jpg\" width=\"200\" alt=\"Chromium\">", "Mn (Manganese)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/64/Manganese_element.jpg\" width=\"200\" alt=\"Manganese\">", "Fe (Iron)<br><img src=\"https://images-of-elements.com/iron-2.jpg\" width=\"200\" alt=\"Iron\">", "Co (Cobalt)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/62/Cobalt_ore_2.jpg\" width=\"200\" alt=\"Cobalt\">", "Ni (Nickel)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/57/Nickel_chunk.jpg\" width=\"200\" alt=\"Nickel\">", "Cu (Copper)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f0/NatCopper.jpg\" width=\"200\" alt=\"Copper\">", "Zn (Zinc)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Zinc_%2830_Zn%29.jpg\" width=\"200\" alt=\"Zinc\">", "Ga (Gallium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b1/Solid_gallium_%28Ga%29.jpg\" width=\"200\" alt=\"Gallium\">", "Ge (Germanium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/08/Polycrystalline-germanium.jpg\" width=\"200\" alt=\"Germanium\">", "As (Arsenic)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/3/3b/Arsenic_%2833_As%29.jpg\" width=\"200\" alt=\"Arsenic\">", "Se (Selenium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/7/7f/Selenium.jpg\" width=\"200\" alt=\"Selenium\">", "Br (Bromine)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/8/87/Bromine-ampoule.jpg\" width=\"200\" alt=\"Bromine\">", "Kr (Krypton)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/9/9c/Krypton-glow.jpg\" width=\"200\" alt=\"Krypton\">", "Rb (Rubidium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c9/Rb5.JPG\" width=\"200\" alt=\"Rubidium\">", "Sr (Strontium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/8/84/Strontium-1.jpg\" width=\"200\" alt=\"Strontium\">", "Y (Yttrium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/9/90/Piece_of_Yttrium.jpg\" width=\"200\" alt=\"Yttrium\">", "Zr (Zirconium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/1/1d/Zirconium-pieces.jpg\" width=\"200\" alt=\"Zirconium\">", "Nb (Niobium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c2/Niobium_strips.JPG\" width=\"200\" alt=\"Niobium\">", "Mo (Molybdenum)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f0/Molybdenum.jpg\" width=\"200\" alt=\"Molybdenum\">", "Tc (Technetium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/ab/Technetium-sample-cropped.jpg\" width=\"200\" alt=\"Technetium\">", "Ru (Ruthenium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a8/Ruthenium_crystal.jpg\" width=\"200\" alt=\"Ruthenium\">", "Rh (Rhodium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/54/Rhodium_%28Rh%29.jpg\" width=\"200\" alt=\"Rhodium\">", "Pd (Palladium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/d/d7/Palladium_%2846_Pd%29.jpg\" width=\"200\" alt=\"Palladium\">", "Ag (Silver)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/e4/Silver-nugget.jpg\" width=\"200\" alt=\"Silver\">", "Cd (Cadmium)<br><img src=\"https://images-of-elements.com/cadmium-4.jpg\" width=\"200\" alt=\"Cadmium\">", "In (Indium)<br><img src=\"https://images-of-elements.com/indium-2.jpg\" width=\"200\" alt=\"Indium\">", "Sn (Tin)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6a/Tin-2.jpg\" width=\"200\" alt=\"Tin\">", "Sb (Antimony)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/5c/Antimony-4.jpg\" width=\"200\" alt=\"Antimony\">", "Te (Tellurium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c1/Tellurium2.jpg\" width=\"200\" alt=\"Tellurium\">", "I (Iodine)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c2/Iodine-sample.jpg\" width=\"200\" alt=\"Iodine\">", "Xe (Xenon)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/5d/Xenon-glow.jpg\" width=\"200\" alt=\"Xenon\">", "Cs (Cesium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/3/3d/Cesium.jpg\" width=\"200\" alt=\"Cesium\">", "Ba (Barium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f5/Barium_%2856_Ba%29.jpg\" width=\"200\" alt=\"Barium\">", "La (Lanthanum)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f7/Lanthanum.jpg\" width=\"200\" alt=\"Lanthanum\">", "Ce (Cerium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/0d/Cerium2.jpg\" width=\"200\" alt=\"Cerium\">", "Pr (Praseodymium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c7/Praseodymium.jpg\" width=\"200\" alt=\"Praseodymium\">", "Nd (Neodymium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c9/Neodymium_%2860_Nd%29.jpg\" width=\"200\" alt=\"Neodymium\">", "Pm (Promethium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/5b/Promethium.jpg\" width=\"200\" alt=\"Promethium\">", "Sm (Samarium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/8/88/Samarium-2.jpg\" width=\"200\" alt=\"Samarium\">", "Eu (Europium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6a/Europium.jpg\" width=\"200\" alt=\"Europium\">", "Gd (Gadolinium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c2/Gadolinium-2.jpg\" width=\"200\" alt=\"Gadolinium\">", "Tb (Terbium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/9/9a/Terbium-2.jpg\" width=\"200\" alt=\"Terbium\">", "Dy (Dysprosium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/55/Dysprosium-2.jpg\" width=\"200\" alt=\"Dysprosium\">", "Ho (Holmium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/0a/Holmium2.jpg\" width=\"200\" alt=\"Holmium\">", "Er (Erbium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/2a/Erbium-2.jpg\" width=\"200\" alt=\"Erbium\">", "Tm (Thulium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6b/Thulium-2.jpg\" width=\"200\" alt=\"Thulium\">", "Yb (Ytterbium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/ce/Ytterbium-3.jpg\" width=\"200\" alt=\"Ytterbium\">", "Lu (Lutetium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/e8/Lutetium.jpg\" width=\"200\" alt=\"Lutetium\">", "Hf (Hafnium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/1/17/Hafnium_%2872_Hf%29.jpg\" width=\"200\" alt=\"Hafnium\">", "Ta (Tantalum)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/61/Tantalum.jpg\" width=\"200\" alt=\"Tantalum\">", "W (Tungsten)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/c/c8/Tungsten_rod_with_oxidised_surface.jpg\" width=\"200\" alt=\"Tungsten\">", "Re (Rhenium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/d/d9/Pure_rhenium_bead%2C_arc_melted%2C_21_grams._Original_size_in_cm_-_1.5_x_1.7.jpg\" width=\"200\" alt=\"Rhenium\">", "Os (Osmium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/3/3c/Osmium-bead.jpg\" width=\"200\" alt=\"Osmium\">", "Ir (Iridium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a8/Iridium-2.jpg\" width=\"200\" alt=\"Iridium\">", "Pt (Platinum)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/68/Platinum_crystals.jpg\" width=\"200\" alt=\"Platinum\">", "Au (Gold)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/8/8a/Gold_%2879_Au%29.jpg\" width=\"200\" alt=\"Gold\">", "Hg (Mercury)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/be/Hydrargyrum_%2880_Hg%29.jpg\" width=\"200\" alt=\"Mercury\">", "Tl (Thallium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/55/Thallium_%2881_Tl%29.jpg\" width=\"200\" alt=\"Thallium\">", "Pb (Lead)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/6/63/Lead-2.jpg\" width=\"200\" alt=\"Lead\">", "Bi (Bismuth)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/a5/Bismuth-2.jpg\" width=\"200\" alt=\"Bismuth\">", "Po (Polonium)<br><img src=\"https://images-of-elements.com/polonium.jpg\" width=\"200\" alt=\"Polonium\">", "At (Astatine)<br><img src=\"https://images-of-elements.com/astatine.jpg\" width=\"200\" alt=\"Astatine\">", "Rn (Radon)<br><img src=\"https://images-of-elements.com/radon.jpg\" width=\"200\" alt=\"Radon\">", "Fr (Francium)<br><img src=\"https://images-of-elements.com/francium.jpg\" width=\"200\" alt=\"Francium\">", "Ra (Radium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/bb/Radium226.jpg\" width=\"200\" alt=\"Radium\">", "Ac (Actinium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/2/27/Actinium_sample_%2831481701837%29.png\" width=\"200\" alt=\"Actinium\">", "Th (Thorium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f7/Thorium-1.jpg\" width=\"200\" alt=\"Thorium\">", "Pa (Protactinium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/a/af/Protactinium-233.jpg\" width=\"200\" alt=\"Protactinium\">", "U (Uranium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/b/b2/Ames_Process_uranium_biscuit.jpg\" width=\"200\" alt=\"Uranium\">", "Np (Neptunium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/e5/Neptunium2.jpg\" width=\"200\" alt=\"Neptunium\">", "Pu (Plutonium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/0/0f/Plutonium_ring.jpg\" width=\"200\" alt=\"Plutonium\">", "Am (Americium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/e/ee/Americium_microscope.jpg\" width=\"200\" alt=\"Americium\">", "Cm (Curium)<br><img src=\"https://images-of-elements.com/s/curium-glow.jpg\" width=\"200\" alt=\"Curium\">", "Bk (Berkelium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fc/Berkelium.jpg\" width=\"200\" alt=\"Berkelium\">", "Cf (Californium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/9/93/Californium.jpg\" width=\"200\" alt=\"Californium\">", "Es (Einsteinium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/55/Einsteinium.jpg\" width=\"200\" alt=\"Einsteinium\">", "Fm (Fermium)<br><img src=\"https://upload.wikimedia.org/wikipedia/commons/5/58/Ivy_Mike_-_mushroom_cloud.jpg\" width=\"200\" alt=\"Fermium\">", "Md (Mendelevium)<br><img src=\"https://images-of-elements.com/s/mendelevium.jpg\" width=\"200\" alt=\"Mendelevium\">", "No (Nobelium)<br><img src=\"https://images-of-elements.com/nobelium.jpg\" width=\"200\" alt=\"Nobelium\">", "Lr (Lawrencium)<br><img src=\"https://images-of-elements.com/lawrencium.jpg\" width=\"200\" alt=\"Lawrencium\">", "Rf (Rutherfordium)<br><img src=\"https://images-of-elements.com/s/rutherfordium.jpg\" width=\"200\" alt=\"Rutherfordium\">", "Db (Dubnium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Dubnium\">", "Sg (Seaborgium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Seaborgium\">", "Bh (Bohrium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Bohrium\">", "Hs (Hassium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Hassium\">", "Mt (Meitnerium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Meitnerium\">", "Ds (Darmstadtium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Darmstadtium\">", "Rg (Roentgenium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Roentgenium\">", "Cn (Copernicium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Copernicium\">", "Nh (Nihonium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Nihonium\">", "Fl (Flerovium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Flerovium\">", "Mc (Moscovium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Moscovium\">", "Lv (Livermorium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Livermorium\">", "Ts (Tennessine)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Tennessine\">", "Og (Oganesson)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Oganesson\">", "Uue (Ununennium)<br><img src=\"https://images-of-elements.com/s/transactinoid.png\" width=\"200\" alt=\"Ununennium\">"
+const periodicTable = [
+    {"number": 1, "symbol": "H", "name": "Hydrogen", "img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Hydrogenglow.jpg"}, {"number": 2, "symbol": "He", "name": "Helium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/00/Helium-glow.jpg"}, {"number": 3, "symbol": "Li", "name": "Lithium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/e2/0.5_grams_lithium_under_argon.jpg"}, {"number": 4, "symbol": "Be", "name": "Beryllium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Beryllium_%28Be%29.jpg"}, {"number": 5, "symbol": "B", "name": "Boron", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Boron.jpg"}, {"number": 6, "symbol": "C", "name": "Carbon", "img": "https://upload.wikimedia.org/wikipedia/commons/6/68/Pure_Carbon.png"}, {"number": 7, "symbol": "N", "name": "Nitrogen", "img": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Nitrogen-glow.jpg"}, {"number": 8, "symbol": "O", "name": "Oxygen", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Liquid_oxygen_in_a_beaker_%28cropped_and_retouched%29.jpg"}, {"number": 9, "symbol": "F", "name": "Fluorine", "img": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Fluoro_liquido_a_-196%C2%B0C_1.jpg"}, {"number": 10, "symbol": "Ne", "name": "Neon", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Neon-glow.jpg"}, {"number": 11, "symbol": "Na", "name": "Sodium", "img": "https://upload.wikimedia.org/wikipedia/commons/2/27/Na_%28Sodium%29.jpg"}, {"number": 12, "symbol": "Mg", "name": "Magnesium", "img": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Magnesium_crystals.jpg"}, {"number": 13, "symbol": "Al", "name": "Aluminium", "img": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Aluminium.jpg"}, {"number": 14, "symbol": "Si", "name": "Silicon", "img": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Silicon.jpg"}, {"number": 15, "symbol": "P", "name": "Phosphorus", "img": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Phosphorus-purple.jpg"}, {"number": 16, "symbol": "S", "name": "Sulfur", "img": "https://upload.wikimedia.org/wikipedia/commons/2/23/Native_sulfur_%28Vodinskoe_Deposit%3B_quarry_near_Samara%2C_Russia%29_9.jpg"}, {"number": 17, "symbol": "Cl", "name": "Chlorine", "img": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Chlorine-sample-flip.jpg"}, {"number": 18, "symbol": "Ar", "name": "Argon", "img": "https://upload.wikimedia.org/wikipedia/commons/5/53/Argon-glow.jpg"}, {"number": 19, "symbol": "K", "name": "Potassium", "img": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Potassium.JPG"}, {"number": 20, "symbol": "Ca", "name": "Calcium", "img": "https://upload.wikimedia.org/wikipedia/commons/7/72/Calcium.jpg"}, {"number": 21, "symbol": "Sc", "name": "Scandium", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Scandium%2C_Sc.jpg"}, {"number": 22, "symbol": "Ti", "name": "Titanium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Titanium.jpg"}, {"number": 23, "symbol": "V", "name": "Vanadium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Vanadium-pieces.jpg"}, {"number": 24, "symbol": "Cr", "name": "Chromium", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Chromium.jpg"}, {"number": 25, "symbol": "Mn", "name": "Manganese", "img": "https://upload.wikimedia.org/wikipedia/commons/6/64/Manganese_element.jpg"}, {"number": 26, "symbol": "Fe", "name": "Iron", "img": "https://images-of-elements.com/iron-2.jpg"}, {"number": 27, "symbol": "Co", "name": "Cobalt", "img": "https://upload.wikimedia.org/wikipedia/commons/6/62/Cobalt_ore_2.jpg"}, {"number": 28, "symbol": "Ni", "name": "Nickel", "img": "https://upload.wikimedia.org/wikipedia/commons/5/57/Nickel_chunk.jpg"}, {"number": 29, "symbol": "Cu", "name": "Copper", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f0/NatCopper.jpg"}, {"number": 30, "symbol": "Zn", "name": "Zinc", "img": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Zinc_%2830_Zn%29.jpg"}, {"number": 31, "symbol": "Ga", "name": "Gallium", "img": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Solid_gallium_%28Ga%29.jpg"}, {"number": 32, "symbol": "Ge", "name": "Germanium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/08/Polycrystalline-germanium.jpg"}, {"number": 33, "symbol": "As", "name": "Arsenic", "img": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Arsenic_%2833_As%29.jpg"}, {"number": 34, "symbol": "Se", "name": "Selenium", "img": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Selenium.jpg"}, {"number": 35, "symbol": "Br", "name": "Bromine", "img": "https://upload.wikimedia.org/wikipedia/commons/8/87/Bromine-ampoule.jpg"}, {"number": 36, "symbol": "Kr", "name": "Krypton", "img": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Krypton-glow.jpg"}, {"number": 37, "symbol": "Rb", "name": "Rubidium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Rb5.JPG"}, {"number": 38, "symbol": "Sr", "name": "Strontium", "img": "https://upload.wikimedia.org/wikipedia/commons/8/84/Strontium-1.jpg"}, {"number": 39, "symbol": "Y", "name": "Yttrium", "img": "https://upload.wikimedia.org/wikipedia/commons/9/90/Piece_of_Yttrium.jpg"}, {"number": 40, "symbol": "Zr", "name": "Zirconium", "img": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Zirconium-pieces.jpg"}, {"number": 41, "symbol": "Nb", "name": "Niobium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Niobium_strips.JPG"}, {"number": 42, "symbol": "Mo", "name": "Molybdenum", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Molybdenum.jpg"}, {"number": 43, "symbol": "Tc", "name": "Technetium", "img": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Technetium-sample-cropped.jpg"}, {"number": 44, "symbol": "Ru", "name": "Ruthenium", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ruthenium_crystal.jpg"}, {"number": 45, "symbol": "Rh", "name": "Rhodium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/54/Rhodium_%28Rh%29.jpg"}, {"number": 46, "symbol": "Pd", "name": "Palladium", "img": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Palladium_%2846_Pd%29.jpg"}, {"number": 47, "symbol": "Ag", "name": "Silver", "img": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Silver-nugget.jpg"}, {"number": 48, "symbol": "Cd", "name": "Cadmium", "img": "https://images-of-elements.com/cadmium-4.jpg"}, {"number": 49, "symbol": "In", "name": "Indium", "img": "https://images-of-elements.com/indium-2.jpg"}, {"number": 50, "symbol": "Sn", "name": "Tin", "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Tin-2.jpg"}, {"number": 51, "symbol": "Sb", "name": "Antimony", "img": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Antimony-4.jpg"}, {"number": 52, "symbol": "Te", "name": "Tellurium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Tellurium2.jpg"}, {"number": 53, "symbol": "I", "name": "Iodine", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Iodine-sample.jpg"}, {"number": 54, "symbol": "Xe", "name": "Xenon", "img": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Xenon-glow.jpg"}, {"number": 55, "symbol": "Cs", "name": "Cesium", "img": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Cesium.jpg"}, {"number": 56, "symbol": "Ba", "name": "Barium", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Barium_%2856_Ba%29.jpg"}, {"number": 57, "symbol": "La", "name": "Lanthanum", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Lanthanum.jpg"}, {"number": 58, "symbol": "Ce", "name": "Cerium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Cerium2.jpg"}, {"number": 59, "symbol": "Pr", "name": "Praseodymium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Praseodymium.jpg"}, {"number": 60, "symbol": "Nd", "name": "Neodymium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Neodymium_%2860_Nd%29.jpg"}, {"number": 61, "symbol": "Pm", "name": "Promethium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Promethium.jpg"}, {"number": 62, "symbol": "Sm", "name": "Samarium", "img": "https://upload.wikimedia.org/wikipedia/commons/8/88/Samarium-2.jpg"}, {"number": 63, "symbol": "Eu", "name": "Europium", "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Europium.jpg"}, {"number": 64, "symbol": "Gd", "name": "Gadolinium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Gadolinium-2.jpg"}, {"number": 65, "symbol": "Tb", "name": "Terbium", "img": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Terbium-2.jpg"}, {"number": 66, "symbol": "Dy", "name": "Dysprosium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/55/Dysprosium-2.jpg"}, {"number": 67, "symbol": "Ho", "name": "Holmium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Holmium2.jpg"}, {"number": 68, "symbol": "Er", "name": "Erbium", "img": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Erbium-2.jpg"}, {"number": 69, "symbol": "Tm", "name": "Thulium", "img": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Thulium-2.jpg"}, {"number": 70, "symbol": "Yb", "name": "Ytterbium", "img": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Ytterbium-3.jpg"}, {"number": 71, "symbol": "Lu", "name": "Lutetium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Lutetium.jpg"}, {"number": 72, "symbol": "Hf", "name": "Hafnium", "img": "https://upload.wikimedia.org/wikipedia/commons/1/17/Hafnium_%2872_Hf%29.jpg"}, {"number": 73, "symbol": "Ta", "name": "Tantalum", "img": "https://upload.wikimedia.org/wikipedia/commons/6/61/Tantalum.jpg"}, {"number": 74, "symbol": "W", "name": "Tungsten", "img": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Tungsten_rod_with_oxidised_surface.jpg"}, {"number": 75, "symbol": "Re", "name": "Rhenium", "img": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Pure_rhenium_bead%2C_arc_melted%2C_21_grams._Original_size_in_cm_-_1.5_x_1.7.jpg"}, {"number": 76, "symbol": "Os", "name": "Osmium", "img": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Osmium-bead.jpg"}, {"number": 77, "symbol": "Ir", "name": "Iridium", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Iridium-2.jpg"}, {"number": 78, "symbol": "Pt", "name": "Platinum", "img": "https://upload.wikimedia.org/wikipedia/commons/6/68/Platinum_crystals.jpg"}, {"number": 79, "symbol": "Au", "name": "Gold", "img": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Gold_%2879_Au%29.jpg"}, {"number": 80, "symbol": "Hg", "name": "Mercury", "img": "https://upload.wikimedia.org/wikipedia/commons/b/be/Hydrargyrum_%2880_Hg%29.jpg"}, {"number": 81, "symbol": "Tl", "name": "Thallium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/55/Thallium_%2881_Tl%29.jpg"}, {"number": 82, "symbol": "Pb", "name": "Lead", "img": "https://upload.wikimedia.org/wikipedia/commons/6/63/Lead-2.jpg"}, {"number": 83, "symbol": "Bi", "name": "Bismuth", "img": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Bismuth-2.jpg"}, {"number": 84, "symbol": "Po", "name": "Polonium", "img": "https://images-of-elements.com/polonium.jpg"}, {"number": 85, "symbol": "At", "name": "Astatine", "img": "https://images-of-elements.com/astatine.jpg"}, {"number": 86, "symbol": "Rn", "name": "Radon", "img": "https://images-of-elements.com/radon.jpg"}, {"number": 87, "symbol": "Fr", "name": "Francium", "img": "https://images-of-elements.com/francium.jpg"}, {"number": 88, "symbol": "Ra", "name": "Radium", "img": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Radium226.jpg"}, {"number": 89, "symbol": "Ac", "name": "Actinium", "img": "https://upload.wikimedia.org/wikipedia/commons/2/27/Actinium_sample_%2831481701837%29.png"}, {"number": 90, "symbol": "Th", "name": "Thorium", "img": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Thorium-1.jpg"}, {"number": 91, "symbol": "Pa", "name": "Protactinium", "img": "https://upload.wikimedia.org/wikipedia/commons/a/af/Protactinium-233.jpg"}, {"number": 92, "symbol": "U", "name": "Uranium", "img": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Ames_Process_uranium_biscuit.jpg"}, {"number": 93, "symbol": "Np", "name": "Neptunium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Neptunium2.jpg"}, {"number": 94, "symbol": "Pu", "name": "Plutonium", "img": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Plutonium_ring.jpg"}, {"number": 95, "symbol": "Am", "name": "Americium", "img": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Americium_microscope.jpg"}, {"number": 96, "symbol": "Cm", "name": "Curium", "img": "https://images-of-elements.com/s/curium-glow.jpg"}, {"number": 97, "symbol": "Bk", "name": "Berkelium", "img": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Berkelium.jpg"}, {"number": 98, "symbol": "Cf", "name": "Californium", "img": "https://upload.wikimedia.org/wikipedia/commons/9/93/Californium.jpg"}, {"number": 99, "symbol": "Es", "name": "Einsteinium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/55/Einsteinium.jpg"}, {"number": 100, "symbol": "Fm", "name": "Fermium", "img": "https://upload.wikimedia.org/wikipedia/commons/5/58/Ivy_Mike_-_mushroom_cloud.jpg"}, {"number": 101, "symbol": "Md", "name": "Mendelevium", "img": "https://images-of-elements.com/s/mendelevium.jpg"}, {"number": 102, "symbol": "No", "name": "Nobelium", "img": "https://images-of-elements.com/nobelium.jpg"}, {"number": 103, "symbol": "Lr", "name": "Lawrencium", "img": "https://images-of-elements.com/lawrencium.jpg"}, {"number": 104, "symbol": "Rf", "name": "Rutherfordium", "img": "https://images-of-elements.com/s/rutherfordium.jpg"}, {"number": 105, "symbol": "Db", "name": "Dubnium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 106, "symbol": "Sg", "name": "Seaborgium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 107, "symbol": "Bh", "name": "Bohrium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 108, "symbol": "Hs", "name": "Hassium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 109, "symbol": "Mt", "name": "Meitnerium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 110, "symbol": "Ds", "name": "Darmstadtium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 111, "symbol": "Rg", "name": "Roentgenium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 112, "symbol": "Cn", "name": "Copernicium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 113, "symbol": "Nh", "name": "Nihonium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 114, "symbol": "Fl", "name": "Flerovium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 115, "symbol": "Mc", "name": "Moscovium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 116, "symbol": "Lv", "name": "Livermorium", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 117, "symbol": "Ts", "name": "Tennessine", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 118, "symbol": "Og", "name": "Oganesson", "img": "https://images-of-elements.com/s/transactinoid.png"}, {"number": 119, "symbol": "Uue", "name": "Ununennium", "img": "https://images-of-elements.com/s/transactinoid.png"}
 ]
 
 const morseData = {
@@ -681,6 +686,118 @@ const gifsData = {
     "9": "https://media.tenor.com/i0x1-y8QubAAAAAm/dancing-number-dancing-letter.webp", // thx tenor user wjirc
 }
 
+const boldData = {
+    "A": "𝗔",
+    "B": "𝗕",
+    "C": "𝗖",
+    "D": "𝗗",
+    "E": "𝗘",
+    "F": "𝗙",
+    "G": "𝗚",
+    "H": "𝗛",
+    "I": "𝗜",
+    "J": "𝗝",
+    "K": "𝗞",
+    "L": "𝗟",
+    "M": "𝗠",
+    "N": "𝗡",
+    "O": "𝗢",
+    "P": "𝗣",
+    "Q": "𝗤",
+    "R": "𝗥",
+    "S": "𝗦",
+    "T": "𝗧",
+    "U": "𝗨",
+    "V": "𝗩",
+    "W": "𝗪",
+    "X": "𝗫",
+    "Y": "𝗬",
+    "Z": "𝗭",
+
+    "a": "𝗮",
+    "b": "𝗯",
+    "c": "𝗰",
+    "d": "𝗱",
+    "e": "𝗲",
+    "f": "𝗳",
+    "g": "𝗴",
+    "h": "𝗵",
+    "i": "𝗶",
+    "j": "𝗷",
+    "k": "𝗸",
+    "l": "𝗹",
+    "m": "𝗺",
+    "n": "𝗻",
+    "o": "𝗼",
+    "p": "𝗽",
+    "q": "𝗾",
+    "r": "𝗿",
+    "s": "𝘀",
+    "t": "𝘁",
+    "u": "𝘂",
+    "v": "𝘃",
+    "w": "𝘄",
+    "x": "𝘅",
+    "y": "𝘆",
+    "z": "𝘇",
+}
+
+const frakturData = {
+    "A": "𝕬",
+    "B": "𝕭",
+    "C": "𝕮",
+    "D": "𝕯",
+    "E": "𝕰",
+    "F": "𝕱",
+    "G": "𝕲",
+    "H": "𝕳",
+    "I": "𝕴",
+    "J": "𝕵",
+    "K": "𝕶",
+    "L": "𝕷",
+    "M": "𝕸",
+    "N": "𝕹",
+    "O": "𝕺",
+    "P": "𝕻",
+    "Q": "𝕼",
+    "R": "𝕽",
+    "S": "𝕾",
+    "T": "𝕿",
+    "U": "𝖀",
+    "V": "𝖁",
+    "W": "𝖂",
+    "X": "𝖃",
+    "Y": "𝖄",
+    "Z": "𝖅",
+
+    "a": "𝖆",
+    "b": "𝖇",
+    "c": "𝖈",
+    "d": "𝖉",
+    "e": "𝖊",
+    "f": "𝖋",
+    "g": "𝖌",
+    "h": "𝖍",
+    "i": "𝖎",
+    "j": "𝖏",
+    "k": "𝖐",
+    "l": "𝖑",
+    "m": "𝖒",
+    "n": "𝖓",
+    "o": "𝖔",
+    "p": "𝖕",
+    "q": "𝖖",
+    "r": "𝖗",
+    "s": "𝖘",
+    "t": "𝖙",
+    "u": "𝖚",
+    "v": "𝖛",
+    "w": "𝖜",
+    "x": "𝖝",
+    "y": "𝖞",
+    "z": "𝖟",
+}
+
 function saveHTML(string){
     return String(string).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
@@ -700,6 +817,16 @@ function replaceByObj(string, obj){
     return result
 }
 
+function replaceByReversedObj(string, obj){
+
+    for(let i = 0; i < Object.keys(obj).length; i++){
+        string = string.replaceAll(Object.values(obj)[i].toLowerCase(), Object.keys(obj)[i])
+        string = string.replaceAll(Object.values(obj)[i].toUpperCase(), Object.keys(obj)[i])
+    }
+
+    return string
+}
+
 function replaceWithRemove(string, obj){
     let result = "";
 
@@ -713,6 +840,15 @@ function replaceWithRemove(string, obj){
         }
     }
     return result
+}
+
+function splitByWords(string){
+    return string.split(" ").join(".")
+    .split(".").join(",")
+    .split(",").join(";")
+    .split(";").join("?")
+    .split("?").join("!")
+    .split("!")
 }
 
 function lowerCase(string){
@@ -739,6 +875,22 @@ function title(string){
     }
 
     return result;
+}
+
+function invertCase(string){
+    let result = "";
+
+    for(let i = 0; i < string.length; i++){
+        if(string[i] == string[i].toLowerCase()){
+            result += string[i].toUpperCase()
+        } else {
+            result += string[i].toLowerCase()
+        }
+    }
+    if(result == result.toUpperCase() || result == result.toLowerCase() || result == title(result).trim()) 
+        return
+
+    return result
 }
 
 function base64(string){
@@ -850,19 +1002,12 @@ function rus2eng(string){
 }
 
 function fromJap(string){
-    string = string.toLowerCase()
+    return replaceByReversedObj(string, japaneseData)
+}
 
-    let reversedData = {};
-
-    for(let i = 0; i < Object.entries(japaneseData).length; i++){
-        reversedData[Object.entries(japaneseData)[i][1]] = Object.entries(japaneseData)[i][0]
-    }
-
-    for(let i = 0; i < Object.keys(reversedData).length; i++){
-        string = string.replaceAll(Object.keys(reversedData)[i], Object.values(reversedData)[i])
-    }
-
-    return string
+function fromBroken(string){
+    1
+    return replaceByReversedObj(string, brokenLettersData)
 }
 
 function toJap(string){
@@ -925,14 +1070,15 @@ function lettersCount(string){
 }
 
 function wordsCount(string){
+    string = splitByWords(string)
     var result = {};
     var output = '';
 
-    for(let i = 0; i < string.split(" ").length; i++){
+    for(let i = 0; i < string.length; i++){
         if(Object.keys(result).includes(string[i])) {
-            result[string.split(" ")[i]] += 1;
+            result[string[i]] += 1;
         } else {
-            result[string.split(" ")[i]] = 1;
+            result[string[i]] = 1;
         }
     }
 
@@ -959,7 +1105,7 @@ function reverse(string){
 
 function reverseWords(string){
     let result = '';
-    string = string.split(" ")
+    string = splitByWords(string)
 
     for(let i = string.length - 1; i >= 0; i--){
         result += string[i] + " "
@@ -969,7 +1115,7 @@ function reverseWords(string){
 }
 
 function sortSymbols(string){
-    return string.split("").sort().join("")
+    return splitByWords(string).sort().join("")
 }
 
 function stalinSort(string){
@@ -985,11 +1131,11 @@ function stalinSort(string){
 }
 
 function sortByLength(string){
-    return string.split(" ").sort((string1, string2) => {return string1.length - string2.length}).join(" ")
+    return splitByWords(string).sort((string1, string2) => {return string1.length - string2.length}).join(" ")
 }
 
 function sortWords(string){
-    return string.split(" ").sort().join(" ")
+    return splitByWords(string).sort().join(" ")
 }
 
 function oddSymbols(string){
@@ -1039,12 +1185,36 @@ function leaveDublicates(string){
     let result = "";
     
     for(let i = 0; i < string.length; i++){
-        if(!result.includes(string[i])) {
+        if(string.replace(string[i], "").includes(string[i])) {
             result += string[i]
         }
     }
 
     return result;
+}
+
+function shuffle(string){
+    string = splitByWords(string)
+
+    let result = []
+    const LENGTH = string.length
+    for(let i = 0; i < LENGTH; i++){
+        let index = Math.floor(Math.random() * string.length)
+        result.push(string[index])
+        string.splice(index, 1)
+    }
+    return result.join(" ")
+}
+
+function shuffleLetters(string){
+    let result = ""
+
+    for(let i = 0; i < string.length; i++){
+        let index = Math.floor(Math.random() * string.length)
+        result += string[index]
+        string[index] = ""
+    }
+    return result
 }
 
 function abbreviation(string){
@@ -1061,11 +1231,11 @@ function abbreviation(string){
 }
 
 function replaceWithLength(string) {
+    string = splitByWords(string)
     let result = "";
 
-    for (let i = 0; i < string.split(" ").length; i++) {
-        result += `<a class="gray" title="${string.split(" ")[i]}">${string.split(" ")[i].length}</a> `
-        console.log(result)
+    for (let i = 0; i < string.length; i++) {
+        result += `<a class="gray" title="${string[i]}">${string[i].length}</a> `
     }
 
     return result;
@@ -1074,11 +1244,9 @@ function replaceWithLength(string) {
 function length(string){
     let result = `Symbols: ${string.length}`
 
-    if(string.split(" ").length > 1){
-        result += `<br>Words: ${string.split(" ").length}`
-    } else if(string.split(".").length > 1){
-        result += `<br>Sentences: ${string.split(".").length}`
-    } else if(string.split("").length > 1){
+    if(splitByWords(string).length > 1){
+        result += `<br>Words: ${splitByWords(string).length}`
+    } if(string.split(".").length > 1){
         result += `<br>Sentences: ${string.split(".").length}`
     }
 
@@ -1086,7 +1254,7 @@ function length(string){
 }
 
 function wordsLength(string){
-    return string.split(" ").length
+    return splitByWords(string).length
 }
 
 function getDivisiors(n){
@@ -1176,6 +1344,14 @@ function axiusLink(string){
     return replaceByObj(string, axiusLinkData)
 }
 
+function bold(string){
+    return replaceByObj(string, boldData)
+}
+
+function fraktur(string){
+    return replaceByObj(string, frakturData)
+}
+
 function alphabetID(string){
     let result = "";
 
@@ -1228,12 +1404,11 @@ function properties(n){
     let powersOf2 = [1] // alternative method:  parseInt(n - 1).toString(2).replaceAll("1", "") === ""
     while(Math.abs(n) < powersOf2[powersOf2.length - 1 && n !== 0]){
         powersOf2.push(powersOf2[powersOf2.length - 1] * 2)
-        console.log(powersOf2)
     }
     result.push(`.isPower2(): ${Math.abs(n) === powersOf2[powersOf2.length - 1]}`) 
 
     // useless props
-    result.push(`.isEven(): ${n % 2 === 0}`)
+    result.push(`.isOdd(): ${n % 2 === 0}`)
     result.push(`.isNatural(): ${Math.abs(n) == n && n !== 0 && Math.floor(n) == n}`)
     result.push(`.isPositive(): ${Math.abs(n) === n}`)
     result.push(`.isInteger(): ${Math.floor(n) === n}`)
@@ -1263,20 +1438,6 @@ function reverseSeq(seq){
     seq = seqToNum(seq)
     if(!seq) return
     return seq.reverse().join("; ")
-}
-
-function shuffle(seq){
-    seq = seqToNum(seq)
-    if(!seq) return
-
-    let result = []
-    const LENGTH = seq.length
-    for(let i = 0; i < LENGTH; i++){
-        let index = Math.floor(Math.random() * seq.length)
-        result.push(seq[index])
-        seq.splice(index, 1)
-    }
-    return result.join("; ")
 }
 
 function sum(seq){
@@ -1403,7 +1564,7 @@ function collatz(n){
         if(Math.abs(n) > max) max = Math.abs(n)
     }
 
-    return result.join(" -&#62 ") + `<br>Total iterations: ${result.length - 1}<br>Max: ${max})`
+    return result.join(" -&#62 ") + `<br>Total iterations: ${result.length - 1}<br>Max: ${max}`
 }
 
 function digitSum(string){
@@ -1452,11 +1613,36 @@ function tan(n){
     return Math.tan(n)
 }
 
-function chemicalSymbol(n){
-    if(n > periodicElements.length || isNaN(n)) return
-    n = Math.abs(parseInt(n))
+function periodicElement(n){
+    let ELEMENT
+    if(!isNaN(n)){
+        if(n > periodicTable.length) return
+        n = parseInt(n)
+        ELEMENT = periodicTable[n - 1]
+    } else {
+        for(let i = 0; i < periodicTable.length; i++){
+            if(periodicTable[i]["symbol"].toLowerCase() === n.toLowerCase()){
+                ELEMENT = periodicTable[i]
+                break
+            }
+        }
+    }
+    if(!ELEMENT) return
+    return `${ELEMENT["symbol"]} (${ELEMENT["name"]})<br><img src="${ELEMENT["img"]}" width=\"200\" alt="${ELEMENT["name"]}" title="${ELEMENT["number"]}th element">`
+}
 
-    return periodicElements[n - 1]
+function periodicElements(string){
+    string = string.toLowerCase()
+    let sum = 0
+
+    for(let i = 0; i < periodicTable.length; i++){
+        sum += (i + 1) * (string.split(periodicTable[i]["symbol"].toLowerCase()).length - 1) // title="${periodicTable[i]["symbol"]} (${periodicTable[i]["number"]}th еlеmеnt, sum is ${sum})"
+        string = string.replaceAll(periodicTable[i]["symbol"].toLowerCase(), `<a>${periodicTable[i]["symbol"]}</a>`) // unfinished
+    }
+    if(sum == 0) return
+    string += `<br>Sum: ${sum}`
+
+    return string
 }
 
 function isPrime(n){
@@ -1758,14 +1944,14 @@ function filterWordsLength(inputs){
 
 // nums
 
-function stringsToInt(nums, maxvalue){
+function stringsToFloat(nums, maxvalue){
     let result = [];
-    nums.forEach((n) => {if(!isNaN(parseInt(n))) {
-        if(parseInt(n) > maxvalue) {
+    nums.forEach((n) => {if(!isNaN(parseFloat(n))) {
+        if(parseFloat(n) > maxvalue) {
             result = null
             return
         } if(result !== null) {
-            result.push(parseInt(n))
+            result.push(parseFloat(n))
         }
     } else { 
         result = null
@@ -1777,7 +1963,7 @@ function stringsToInt(nums, maxvalue){
 }
 
 function pow(nums){
-    nums = stringsToInt(nums, 10000000000000000000000000)
+    nums = stringsToFloat(nums, 10000000000000000000000000)
     if(nums === null){
         return
     }
@@ -1786,7 +1972,7 @@ function pow(nums){
 }
 
 function proportion(nums){
-    nums = stringsToInt(nums, 1000000)
+    nums = stringsToFloat(nums, 1000000)
     if(nums === null){
         return
     }
@@ -1801,7 +1987,7 @@ function proportion(nums){
 }
 
 function generateFibonacci(nums){
-    nums = stringsToInt(nums, 100000000)
+    nums = stringsToFloat(nums, 100000000)
     if(nums === null) return
     
     const LENGTH_LIMIT = 50
@@ -1814,7 +2000,7 @@ function generateFibonacci(nums){
 }
 
 function randint(nums){
-    nums = stringsToInt(nums, 100000000)
+    nums = stringsToFloat(nums, 100000000)
     if(nums === null) return
 
     return Math.floor(Math.random() * (nums[1] + 1 - nums[0])) + nums[0]
