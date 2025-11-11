@@ -1,2 +1,1 @@
-# strings
-string methods.
+# [strings](https://hexique.github.io/strings/)
