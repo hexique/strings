@@ -1,6 +1,7 @@
 const methods = [[
-    properties, 
+    properties, // properties
     sort, reverseSeq, sum, // lists
+    fromEngIDs, fromRusIDs, // from
 
     minMax, average, median, // num
     square, sqrt, powOf2, // powers
@@ -16,17 +17,18 @@ const methods = [[
     lowerCase, upperCase, title, invertCase, // case
     rus2eng, eng2rus, rusByEng, toJap, changeLayout, // lang
     lettersCount, wordsCount, // count
-    toBroken, leed, alphabetID, toMorse, // replace
+    emojis, toBroken, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
     oddSymbols, squareSymbols, primeSymbols, // remove
     removeDublicates, leaveDublicates, // dublicates
-    shuffle, shuffleLetters, // shuffle
+    shuffle, shuffleWords, // shuffle
     shiftBy1, shiftByMinus1, shiftBy22, // shift
-    base64, toBin, toDec, toHex, to36, toNumber, hash, // convert 
+    base64, fromBase64, // base64 
+    toBin, toDec, toHex, to36, toNumber, hash, // convert 
     fromBin, fromHex, from36, // from number systems
     abbreviation, typo, // idk
-    strikethrough, bold, fraktur, // 
+    strikethrough, bold, fraktur, // fonts
     replaceWithLength, length, // lengths
     periodicElements, // chemistry
     periodicElement, logos, dancingLetters], [ // images
@@ -35,7 +37,8 @@ const methods = [[
 
     filter, symbolFilter, negativeSymbolFilter, // filters
     merge, mergeReplace, // merge
-    averageString, insert // other
+    averageString, // avg
+    insert, // insert
 ]]
 
 function changeTitle(string){
@@ -798,6 +801,11 @@ const frakturData = {
     "z": "𝖟",
 }
 
+// const emojisData = ['&#55357;', '&#56832;', '&#55357;', '&#56833;', '&#55357;', '&#56834;', '&#55358;', '&#56611;', '&#55357;', '&#56835;', '&#55357;', '&#56836;', '&#55357;', '&#56837;', '&#55357;', '&#56838;', '&#55357;', '&#56841;', '&#55357;', '&#56842;', '&#55357;', '&#56843;', '&#55357;', '&#56846;', '&#55357;', '&#56845;', '&#55357;', '&#56856;', '&#55357;', '&#56846;', '&#55357;', '&#56845;', '&#55357;', '&#56856;', '&#55358;', '&#56688;', '&#55357;', '&#56855;', '&#55358;', '&#56593;', '&#55358;', '&#56693;', '&#55357;', '&#56881;', '&#55358;', '&#56623;', '&#55358;', '&#56622;', '&#55358;', '&#56610;', '&#55358;', '&#56609;', '&#55357;', '&#56489;', '&#55358;', '&#56595;', '&#55358;', '&#56784;', '&#55358;', '&#56596;', '&#55357;', '&#56613;', '&#55357;', '&#56831;', '&#55357;', '&#56448;']
+const emojisData = [
+    "&#128512;", "&#128077;", "&#10024;", "&#128516;", "&#128512;", "&#129315;", "&#128515;", "&#128523;", "&#128526;", "&#128525;", "&#129300;", "&#128527;", "&#129299;", "&#129297;", "&#128557;", "&#128561;", "&#128563;", "&#128545;", "&#129313;", "&#128128;", "&#128169;", "&#128165;", "&#127817;", "&#127820;", "&#127821;", "&#127825;", "&#127828;", "&#127752;", "&#128226;", "&#128276;", "&#128176;", "&#128184;", "&#128274;", "&#128296;", "&#128138;", "&#128137;", "&#128511;", "&#128302;", "&#9989;", "&#10060;", "&#129397;", "&#129398;", "&#129327;", "&#129488;", "&#129393;", "&#128166;", "&#128168;", "&#129504;"
+]
+
 function saveHTML(string){
     return String(string).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 }
@@ -904,8 +912,24 @@ function base64(string){
 
     try {
         return btoa(rus2eng(formatedString))
-    } catch(exception) {
-        return `Error: ${exception}`
+    } catch {
+        return
+    }
+}
+
+function fromBase64(string){
+    let formatedString = "";
+
+    for(let i = 0; i < string.length; i++){
+        if(/^[\x00-\x7F]*$/.test(string[i])){
+            formatedString = `${formatedString}${string[i]}`
+        }
+    }
+
+    try {
+        return atob(formatedString)
+    } catch {
+        return
     }
 }
 
@@ -1194,6 +1218,18 @@ function leaveDublicates(string){
 }
 
 function shuffle(string){
+    let result = ""
+    const len = string.length
+
+    for(let i = 0; i < len; i++){
+        let index = Math.floor(Math.random() * string.length)
+        result += string[index]
+        string = string.slice(0, index) + string.slice(index + 1)
+    }
+    return result
+}
+
+function shuffleWords(string){
     string = splitByWords(string)
 
     let result = []
@@ -1204,17 +1240,6 @@ function shuffle(string){
         string.splice(index, 1)
     }
     return result.join(" ")
-}
-
-function shuffleLetters(string){
-    let result = ""
-
-    for(let i = 0; i < string.length; i++){
-        let index = Math.floor(Math.random() * string.length)
-        result += string[index]
-        string[index] = ""
-    }
-    return result
 }
 
 function abbreviation(string){
@@ -1377,6 +1402,19 @@ function toMorse(string){
     return result
 }
 
+function emojis(string){
+    string = splitByWords(string)
+    let result = ""
+
+    for(let i = 0; i < string.length; i++){
+        emojiID = Math.floor(Math.random() * emojisData.length)
+        result += `${string[i]}${emojisData[emojiID]}`
+        // console.log(`ID = ${emojiID}; Emoji = ${emojisData[emojiID]}; i = ${i}; result = ${result}`)
+    }
+
+    return result;
+}
+
 // nums
 
 function properties(n){
@@ -1437,7 +1475,7 @@ function sort(seq){
 function reverseSeq(seq){
     seq = seqToNum(seq)
     if(!seq) return
-    return seq.reverse().join("; ")
+    return seq.reverse().join(" ")
 }
 
 function sum(seq){
@@ -1447,6 +1485,30 @@ function sum(seq){
     let result = 0
     seq.forEach((n) => {result += n})
     return result
+}
+
+function fromIDs(seq, shift) {
+    seq = seqToNum(seq)
+    if(!seq) return
+    let result = ""
+
+    for(let i = 0; i < seq.length; i++){
+        if(seq[i] < alphabetIdData.length){
+            result += alphabetIdData[seq[i]][shift].toLowerCase() // shift
+        } else {
+            return
+        }
+    }
+
+    return result
+}
+
+function fromEngIDs(seq){
+    return fromIDs(seq, 1)
+}
+
+function fromRusIDs(seq){
+    return fromIDs(seq, 0)
 }
 
 function minMax(seq){
@@ -1567,29 +1629,44 @@ function collatz(n){
     return result.join(" -&#62 ") + `<br>Total iterations: ${result.length - 1}<br>Max: ${max}`
 }
 
-function digitSum(string){
-    let result = 0;
+function digitSum(n){
+    if(isNaN(parseFloat(n)) || n > 100000000000000000000) return
+    n = Math.abs(parseFloat(n))
 
-    string = string.split("").forEach((element) => {
-        if(isNaN(parseInt(element))) return
-        result += parseInt(element)})
+    let result = [n];
+    let sum;
 
-    if(result == 0) return
+    while(String(result[result.length - 1]).length !== 1) {
+        sum = 0
+        for(let i = 0; i < String(n).length; i++){
+            if(String(n)[i] !== "."){
+                sum += parseInt(String(n)[i])
+            }
+        }
+        result.push(sum)
+        n = sum
+    }
 
-    return result
+    return result.join(" -> ")
 }
 
-function digitMult(string){
-    let result = 1;
+function digitMult(n){
+    if(isNaN(parseFloat(n)) || n > 100000000000000000000) return
+    n = Math.abs(parseFloat(n))
 
-    string.split("").forEach((element) => {
-        if(isNaN(parseInt(element))) result = undefined
-        result *= parseInt(element)
-    })
+    let result = [n];
+    let sum;
 
-    if(isNaN(result)) return
+    while(String(result[result.length - 1]).length !== 1) {
+        sum = 1
+        for(let i = 0; i < String(n).length; i++){
+            sum *= parseInt(String(n)[i])
+        }
+        result.push(sum)
+        n = sum
+    }
 
-    return result
+    return result.join(" -> ")
 }
 
 function sin(n){
@@ -1648,7 +1725,7 @@ function periodicElements(string){
 function isPrime(n){
     if(n == 1) return true
 
-    if([1, 3, 7, 9].includes(n % 10) && n > 10 && digitSum(String(n)) % 3 != 0){
+    if((n > 10 && [1, 3, 7, 9].includes(n % 10)) && digitSum(String(n)) % 3 != 0){
         for(let i = 2; i < n; i++){
             if(n % i == 0){
                 return false
@@ -1713,16 +1790,17 @@ function divisiors(n){
 
     if(result.length <= 1) return `No divisiors.`
         
-    return `${result.join("; ")}<br>Sum: ${result.reduce((a, b) => a + b, 0)}<br>Total divisiors: ${result.length}`
+    return `${result.join(" ")}<br>Sum: ${result.reduce((a, b) => a + b, 0)}<br>Total divisiors: ${result.length}`
 }
 
 function convertFromNumberSys(n, target){
     let symbols = []
 
-    n = n.split(" ").forEach((element) => {
-        if(isNaN(parseInt(element, target))) return;
-        symbols.push(parseInt(element, target))
-    })
+    for(let i = 0; i < n.split(" ").length; i++) {
+        if(n >= 100000000000000000000) return
+        if(isNaN(parseInt(n.split(" ")[i], target))) return;
+        symbols.push(parseInt(n.split(" ")[i], target))
+    }
 
     return symbols;
 }
@@ -1793,7 +1871,7 @@ function toRoman(n){
         result += ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"][Math.floor(n % 1000 / 100)]
     } if(n > 10) {
         result += ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"][Math.floor(n % 100 / 10)]
-    } if(n > 1) {
+    } if(n >= 1) {
         result += ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][Math.floor(n % 10)]
     }
 
@@ -1887,6 +1965,18 @@ function insert(strings){
         result += `<a class="red">${strings[0][i]}</a><a class="green">${strings[1]}</a>`
     }
     result += `<a class="red">${strings[0][strings[0].length - 1]}</a>`
+
+    return result;
+}
+
+function insertBetweenWords(strings){
+    let string = splitByWords(strings[0])
+    let result = "";
+
+    for (var i = 0; i < string.length - 1; i++) {
+        result += `<a class="red">${string[i]}</a><a class="green">${strings[1]}</a>`
+    }
+    result += `<a class="red">${string[string.length - 1]}</a>`
 
     return result;
 }
@@ -1996,7 +2086,7 @@ function generateFibonacci(nums){
         nums.push(nums[nums.length - 1] + nums[nums.length - 2])
     }
 
-    return nums.join("; ")
+    return nums.join(" ")
 }
 
 function randint(nums){
