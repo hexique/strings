@@ -10,8 +10,9 @@ body{
   font-size: 0.9em;
 }
 
-p, a, strong, h1, h2, h3{
+p, a, b, strong, h1, h2, h3{
   font-family: Arial;
+  word-break: break-all;
 }
 
 .red{
@@ -22,7 +23,11 @@ p, a, strong, h1, h2, h3{
   color: hsl(120, 50%, 45%);
 }
 
-a, h1, h2, h3{
+.gray{
+  color: #808080;
+}
+
+a, b, h1, h2, h3{
   color: #ffff;
 }
 
@@ -51,7 +56,7 @@ input{
   font-family: Arial;
   font-size: 1em;
   width: 200px;
-  margin: -15px;
+
 }
 
 button{
