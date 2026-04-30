@@ -457,24 +457,25 @@ const greekData = {
     "A": "α",
     "B": "β",
     "C": "ς",
-    "D": "D",
+    "D": "d",
     "E": "ε",
     "F": "ζ",
-    "G": "G",
-    "H": "H",
+    "G": "g",
+    "H": "h",
     "I": "ι",
+    "J": "j",
     "K": "κ",
-    "L": "L",
-    "M": "M",
+    "L": "l",
+    "M": "м",
     "N": "η",
     "O": "σ",
     "P": "π",
-    "Q": "Q",
-    "R": "R",
-    "S": "S",
+    "Q": "q",
+    "R": "r",
+    "S": "s",
     "T": "τ",
     "U": "μ",
-    "V": "V",
+    "V": "v",
     "W": "ω",
     "X": "χ",
     "Y": "γ",
@@ -483,7 +484,7 @@ const greekData = {
     "А": "α",
     "Б": "δ",
     "В": "β",
-    "Г": "Г",
+    "Г": "г",
     "Д": "Δ",
     "Е": "ε",
     "Ё": "ε",
@@ -493,9 +494,9 @@ const greekData = {
     "Й": "ι",
     "К": "κ",
     "Л": "λ",
-    "М": "Μ",
-    "Н": "Н",
-    "О": "Ω",
+    "М": "м",
+    "Н": "н",
+    "О": "σ",
     "П": "π",
     "Р": "ρ",
     "С": "ς",
@@ -503,16 +504,16 @@ const greekData = {
     "У": "γ",
     "Ф": "φ",
     "Х": "χ",
-    "Ц": "Ц",
-    "Ч": "Ч",
+    "Ц": "ц",
+    "Ч": "ч",
     "Ш": "ω",
-    "Щ": "Щ",
-    "Ъ": "Ъ",
-    "Ы": "Ы",
-    "Ь": "Ь",
-    "Э": "Э",
-    "Ю": "Ю",
-    "Я": "Я",
+    "Щ": "щ",
+    "Ъ": "ъ",
+    "Ы": "ы",
+    "Ь": "ь",
+    "Э": "э",
+    "Ю": "ю",
+    "Я": "я",
 }
 
 const rusByEngData = {
@@ -1344,7 +1345,18 @@ function toBroken(string){
 }
 
 function toGreek(string){
-    return replaceByObj(string, greekData);
+    let result = "";
+
+    for(let i = 0; i < string.length; i++){
+        if(greekData[string[i]] !== undefined){
+            result += greekData[string[i]]
+        } else if(greekData[string[i].toUpperCase()] !== undefined){
+            result += greekData[string.toUpperCase()[i]]
+        } else {
+            result += string[i].toLowerCase()
+        }
+    }
+    return result
 }
 
 function rusByEng(string){
