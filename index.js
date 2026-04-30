@@ -12,7 +12,7 @@ function formatString(){
             && String(methods[0][i](string[0])).replaceAll(" ", "").length !== 0
             && methods[0][i](string[0]) != undefined){
             document.getElementById("string-output-1").innerHTML += `
-            <br><h3>.${methods[0][i].name}()</h3><p>${methods[0][i](string[0])}</p>`
+            <br><h3>.${methods[0][i].name}()</h3><p class="spaces">${methods[0][i](string[0])}</p>`
         }
         // console.log(methods[0][i].name)
     }
@@ -50,7 +50,7 @@ function formatSecondString(){
             for(let i = 0; i < methods[1].length; i++){
                 if(![undefined, null, "", strings[1].value, strings[0].value].includes(methods[1][i]([strings[0], strings[1].value])))
                 document.getElementById("string-output-2").innerHTML += 
-`<br><h3>.${methods[1][i].name}()</h3><p>${methods[1][i]([strings[0], strings[1].value])}</p>`
+`<br><h3>.${methods[1][i].name}()</h3><p class="spaces">${methods[1][i]([strings[0], strings[1].value])}</p>`
             }
 
             // console.log(document.getElementById("string-input-2").value, string[1].value)

@@ -17,7 +17,7 @@ const methods = [[
     lowerCase, upperCase, title, invertCase, // case
     rus2eng, eng2rus, rusByEng, toJap, changeLayout, // lang
     lettersCount, wordsCount, // count
-    emojis, toBroken, leed, alphabetID, toMorse, // replace
+    emojis, toBroken, toGreek, leed, alphabetID, toMorse, // replace
     reverse, reverseWords, upsideDown, // reverse
     sortSymbols, sortWords, sortByLength, // sort
     oddSymbols, squareSymbols, primeSymbols, // remove
@@ -34,12 +34,223 @@ const methods = [[
     periodicElement, logos, dancingLetters], [ // images
     pow, proportion, randint, generateFibonacci, // nums
     split, filterWordsLength, // string + num
+    convertToCustomBase, convertFromCustomBase, // bases
 
     filter, symbolFilter, negativeSymbolFilter, // filters
     merge, mergeReplace, // merge
     averageString, // avg
     insert, // insert
 ]]
+
+const desc = {
+    properties: {'inputType': 'float', 'content':
+    'displays the properties of a number. (is prime, is fibonacci, is palindrome, is square, is cubic, is perfect, is power of 2, is odd, is natural, is positive and is integer)'},
+    sort: {'inputType': 'seq', 'content':
+    'sorts a sequence of numbers in ascending order'},
+    reverseSeq: {'inputType': 'seq', 'content':
+    'returns a sequence of numbers in reverse order'},
+    sum: {'inputType': 'seq', 'content':
+    'returns a sum of sequence of numbers'},
+    fromEngIDs: {'inputType': 'seq', 'content':
+    'replaces numbers with English letters with the corresponding ordinal number (1 = a, 2 = b, 3 = c, etc)'},
+    fromRusIDs: {'inputType': 'seq', 'content':
+    'the same thing, only with Russian letters'},
+    minMax: {'inputType': 'seq', 'content':
+    'returns the minimum and maximum numbers in the sequence'},
+    average: {'inputType': 'seq', 'content':
+    'sum(seq) / length'},
+    median: {'inputType': 'seq', 'content':
+    '<a href="https://en.wikipedia.org/wiki/Median" target="_blank">en.wikipedia.org/wiki/Median</a>'},
+    square: {'inputType': 'float', 'content':
+    'returns the square of a number'},
+    sqrt: {'inputType': 'float', 'content':
+    'returns the square root of a number'},
+    powOf2: {'inputType': 'float', 'content':
+    '2 to the power of n. (we will refer to the incoming number as n)'},
+    sin: {'inputType': 'float', 'content':
+    'sine of n'},
+    cos: {'inputType': 'float', 'content':
+    'cosine of n'},
+    tan: {'inputType': 'float', 'content':
+    'tangent of n'},
+    divisiors: {'inputType': 'int', 'content':
+    'outputs all numbers that n is divisible by (except n itself) and their sum'},
+    factorial: {'inputType': 'int', 'content':
+    '1 * 2 * 3 ... * n'},
+    seqSum: {'inputType': 'int', 'content':
+    '1 + 2 + 3 ... + n'},
+    collatz: {'inputType': 'int', 'content':
+    'if the number is even, multiply it by two; otherwise, multiply it by 3 and add 1. Repeat this operation until it loops. (<a href="https://en.wikipedia.org/wiki/Collatz_conjecture", target="_blank">wiki</a>)'},
+    digitSum: {'inputType': 'float', 'content':
+    'adds up all the digits of a number'},
+    digitMult: {'inputType': 'float', 'content':
+    'multiplies all digits of a number'},
+    nearestPrime: {'inputType': 'float', 'content':
+    'the closest number without divisors to n'},
+    nearestFibonacci: {'inputType': 'float', 'content':
+    'the closest number in the Fibonacci sequence to n'},
+    nearestSquare: {'inputType': 'float', 'content':
+    'the nearest square number to n'},
+    round: {'inputType': 'float', 'content':
+    'rounds the number'},
+    unicode: {'inputType': 'int', 'content':
+    'displays the character at position n'},
+    toRoman: {'inputType': 'float', 'content':
+    'converts a number into the Roman numeral system'},
+    timestamp: {'inputType': 'int', 'content':
+    'date for which n seconds have passed since 1970 (unix)'},
+    decToBin: {'inputType': 'int', 'content':
+    'converts a number from the decimal number system to the binary number system'},
+    decToHex: {'inputType': 'int', 'content':
+    'converts a number from the decimal system to the hexadecimal system'},
+    decTo36: {'inputType': 'int', 'content':
+    'converts a number from the decimal system to the base-36 system'},
+    fromBroken: {'inputType': 'str', 'content':
+    'translates this ł○ř∑ʍ ⅰ₽⫓ʊʍ into normal text'},
+    fromJap: {'inputType': 'str', 'content':
+    'transcription of Japanese characters'},
+    lowerCase: {'inputType': 'str', 'content':
+    'converts text to lowercase (Text -> text)'},
+    upperCase: {'inputType': 'str', 'content':
+    'converts text to uppercase (Text -> TEXT)'},
+    title: {'inputType': 'str', 'content':
+    'returns text with all words capitalized (lorem ipsum dolor -> Lorem Ipsum Dolor)'},
+    invertCase: {'inputType': 'str', 'content':
+    'changes the case in the text to the opposite (Text -> tEXT)'},
+    rus2eng: {'inputType': 'str', 'content':
+    'returns Russian text written in English letters as a transcription (текст -> tekst)'},
+    eng2rus: {'inputType': 'str', 'content':
+    'returns the English text written in Russian letters as a transcription (text -> текст)'},
+    rusByEng: {'inputType': 'str', 'content':
+    'returns Russian text written in English letters (текст -> tekct)'},
+    toJap: {'inputType': 'str', 'content':
+    'returns text written in Japanese characters as a transcription'},
+    changeLayout: {'inputType': 'str', 'content':
+    'returns text written in a different keyboard layout (ntrcn -> текст)'},
+    lettersCount: {'inputType': 'str', 'content':
+    'returns the number of each letter in the text'},
+    wordsCount: {'inputType': 'str', 'content':
+    'returns the number of each word in the text'},
+    emojis: {'inputType': 'str', 'content':
+    'inserts a random emoji after each word'},
+    toBroken: {'inputType': 'str', 'content':
+    'replaces Unicode letters with similar-looking characters (lorem ipsum -> ł○ř∑ʍ ⅰ₽⫓ʊʍ)'},
+    toGreek: {'inputType': 'str', 'content':
+    'replaces some english/russian symbols to greek (lorem ipsum -> lσrεm ιπsμm)'},
+    leed: {'inputType': 'str', 'content':
+    'replaces letters with numbers that resemble them (i - 1, e - 3, a - 4, s - 5, etc.)'},
+    alphabetID: {'inputType': 'str', 'content':
+    'replaces letters with their ordinal number in the alphabet'},
+    toMorse: {'inputType': 'str', 'content':
+    'converts text into Morse code'},
+    reverse: {'inputType': 'str', 'content':
+    'returns text written backwards'},
+    reverseWords: {'inputType': 'str', 'content':
+    'returns text by reversing all words in reverse order'},
+    upsideDown: {'inputType': 'str', 'content':
+    'returns text written upside down (ɯnsdᴉ ɯǝɹol)'},
+    sortSymbols: {'inputType': 'str', 'content':
+    'sorts characters in text alphabetically'},
+    sortWords: {'inputType': 'str', 'content':
+    'sorts words in text alphabetically'},
+    sortByLength: {'inputType': 'str', 'content':
+    'sorts characters in text by length'},
+    oddSymbols: {'inputType': 'str', 'content':
+    'removes all characters with an even ordinal number from the text'},
+    squareSymbols: {'inputType': 'str', 'content':
+    'removes all characters with a square ordinal number from the text'},
+    primeSymbols: {'inputType': 'str', 'content':
+    'removes all characters with a sequential number without separators from the text'},
+    removeDublicates: {'inputType': 'str', 'content':
+    'removes all repeated characters from the text'},
+    leaveDublicates: {'inputType': 'str', 'content':
+    'leaves only repeated characters in the text'},
+    shuffle: {'inputType': 'str', 'content':
+    'shuffles characters in random order'},
+    shuffleWords: {'inputType': 'str', 'content':
+    'shuffles words in random order'},
+    shiftBy1: {'inputType': 'str', 'content':
+    'adds to Unicode characters in text 1'},
+    shiftByMinus1: {'inputType': 'str', 'content':
+    'removes Unicode characters from text 1'},
+    shiftBy22: {'inputType': 'str', 'content':
+    'adds to Unicode characters in text 22'},
+    base64: {'inputType': 'str', 'content':
+    'converts text to base64'},
+    fromBase64: {'inputType': 'str', 'content':
+    'decodes text from base64'},
+    toBin: {'inputType': 'str', 'content':
+    'converts text into binary code'},
+    toDec: {'inputType': 'str', 'content':
+    'converts text into a sequence of Unicode values'},
+    toHex: {'inputType': 'str', 'content':
+    'converts text into hexadecimal code'},
+    to36: {'inputType': 'str', 'content':
+    'converts text into base-36 code'},
+    toNumber: {'inputType': 'str', 'content':
+    'converts text into hexadecimal code, concatenates the sequence into a single number, and converts it to the decimal number system'},
+    hash: {'inputType': 'str', 'content':
+    '<a href="https://en.wikipedia.org/wiki/Hash_function">https://en.wikipedia.org/wiki/Hash_function</a>'},
+    fromBin: {'inputType': 'str', 'content':
+    'converts a sequence of numbers from the binary number system into text'},
+    fromHex: {'inputType': 'str', 'content':
+    'converts a sequence of numbers from the hexadecimal number system into text'},
+    from36: {'inputType': 'str', 'content':
+    'converts a sequence of numbers from the base-36 number system into text'},
+    abbreviation: {'inputType': 'str', 'content':
+    'converts text into an abbreviation (too long didn\'t read -> T.L.D.R.)'},
+    typo: {'inputType': 'str', 'content':
+    'writes text wiht typos (lorem ipsum -> lorwm jpsum)'},
+    strikethrough: {'inputType': 'str', 'content':
+    'crosses out text'},
+    bold: {'inputType': 'str', 'content':
+    'writes text in bold Unicode characters (Mathematical Sans-Serif Bold)'},
+    fraktur: {'inputType': 'str', 'content':
+    'writes text using old medieval Unicode characters (Mathematical Bold Fraktur)'},
+    replaceWithLength: {'inputType': 'str', 'content':
+    'replaces words in the text with their length; when hovering over a number, the original word is displayed'},
+    length: {'inputType': 'str', 'content':
+    'returns the number of characters, words, and sentences'},
+    periodicElements: {'inputType': 'str', 'content':
+    'identifies all chemical elements and calculates their sum (refer to the password game)'},
+    periodicElement: {'inputType': 'str/int', 'content':
+    'displays the chemical element corresponding to the entered number or symbol'},
+    logos: {'inputType': 'str', 'content':
+    'returns text with letters replaced by logos'},
+    dancingLetters: {'inputType': 'str', 'content':
+    'returns letters in text with old GIFs of dancing letters'},
+
+    pow: {'inputType': 'num1, num2', 'content':
+    'x to the power of y (x - first number, y - second number)'},
+    proportion: {'inputType': 'num1, num2', 'content':
+    'ratio of x to y'},
+    randint: {'inputType': 'num1, num2', 'content':
+    'a random number between x and y'},
+    generateFibonacci: {'inputType': 'num1, num2', 'content':
+    'returns a Fibonacci sequence of length 50 with initial values x and y'},
+    split: {'inputType': 'str, num', 'content':
+    'inserts spaces in the text so that the length of all words is equal to n ("lorem ipsum dolor sit amet", 4 -> lore mips umdo lors itam et)'},
+    filterWordsLength: {'inputType': 'str, num', 'content':
+    'leaves only words with length n'},
+    convertToCustomBase: {'inputType': 'num, str', 'content':
+    'converts number from dec to custom n-base with cutsom digits'},
+    convertFromCustomBase: {'inputType': 'str, str', 'content':
+    'converts number from custom n-base with cutsom digits to dec'},
+    filter: {'inputType': 'str1, str2', 'content':
+    'removes all str2 from str1 ("lorem ipsum dolor sit amet", "lo" -> rem ipsum dor sit amet)'},
+    symbolFilter: {'inputType': 'str1, str2', 'content':
+    'removes all characters from str2 from str1 ("lorem ipsum", "oei" => lrm psum)'},
+    negativeSymbolFilter: {'inputType': 'str1, str2', 'content':
+    'leaves only characters from str2 in str1 ("lorem ipsum", "mosei" => oemism)'},
+    merge: {'inputType': 'str1, str2', 'content':
+    'writes characters from str1 and str2 in turn, saving all characters ("lorem", "ipsum" -> ilposruemm)'},
+    mergeReplace: {'inputType': 'str1, str2', 'content':
+    'writes characters from str1 and str2 in turn ("lorem", "ipsum" -> iosem)'},
+    averageString: {'inputType': 'str1, str2', 'content':
+    'calculates the average string between str1 and str2 by adding the Unicode character numbers and dividing by 2'},
+    insert: {'inputType': 'str1, str2', 'content':
+    'inserts str2 after each character in str1 ("lorem", "-" -> l-o-r-e-m)'},
+}
 
 function changeTitle(string){
     while(document.title.length < 7 || document.title.length > 14 || String(document.title) == "undefined"){
@@ -238,6 +449,70 @@ const brokenLettersData = {
     "Э": "Ӭ",
     "Ю": "Ꙕ",
     "Я": "Ԙ",
+}
+// ΡεδιτΗγλ Ελεκτριчεςκγю ΔιΗαΜικγ
+const greekData = {
+    " ": " ",
+
+    "A": "α",
+    "B": "β",
+    "C": "ς",
+    "D": "D",
+    "E": "ε",
+    "F": "ζ",
+    "G": "G",
+    "H": "H",
+    "I": "ι",
+    "K": "κ",
+    "L": "L",
+    "M": "M",
+    "N": "η",
+    "O": "σ",
+    "P": "π",
+    "Q": "Q",
+    "R": "R",
+    "S": "S",
+    "T": "τ",
+    "U": "μ",
+    "V": "V",
+    "W": "ω",
+    "X": "χ",
+    "Y": "γ",
+    "Z": "Ζ",
+
+    "А": "α",
+    "Б": "δ",
+    "В": "β",
+    "Г": "Г",
+    "Д": "Δ",
+    "Е": "ε",
+    "Ё": "ε",
+    "Ж": "ψ",
+    "З": "З",
+    "И": "ι",
+    "Й": "ι",
+    "К": "κ",
+    "Л": "λ",
+    "М": "Μ",
+    "Н": "Н",
+    "О": "Ω",
+    "П": "π",
+    "Р": "ρ",
+    "С": "ς",
+    "Т": "τ",
+    "У": "γ",
+    "Ф": "φ",
+    "Х": "χ",
+    "Ц": "Ц",
+    "Ч": "Ч",
+    "Ш": "ω",
+    "Щ": "Щ",
+    "Ъ": "Ъ",
+    "Ы": "Ы",
+    "Ь": "Ь",
+    "Э": "Э",
+    "Ю": "Ю",
+    "Я": "Я",
 }
 
 const rusByEngData = {
@@ -941,6 +1216,18 @@ function convertToNumberSys(string, num){
     return result;
 }
 
+function convertToText(n, target){
+    let symbols = ''
+
+    for(let i = 0; i < n.split(" ").length; i++) {
+        if(n >= 100000000000000000000) return
+        if(isNaN(parseInt(n.split(" ")[i], target))) return;
+        symbols += `&#${(parseInt(n.split(" ")[i], target))}`
+    }
+
+    return symbols;
+}
+
 function changeLayout(string){
     let result = "";
     let reversedData = {};
@@ -1054,6 +1341,10 @@ function leed(string){
 
 function toBroken(string){
     return replaceByObj(string, brokenLettersData);
+}
+
+function toGreek(string){
+    return replaceByObj(string, greekData);
 }
 
 function rusByEng(string){
@@ -1588,7 +1879,7 @@ function factorial(n){
     let result = 1;
 
     if(n == 0) return 1
-    for(let i = 1; i < n; i++){
+    for(let i = 1; i <= n; i++){ // Было <, вместо <=
         result *= i
         // console.log(`${result} (${i}/${string})`)
     }
@@ -1597,18 +1888,11 @@ function factorial(n){
 }
 
 function seqSum(n){
-    if(n > 1500 || isNaN(n)) return
-    n = parseInt(n)
-
-    let result = 0;
-
-    if(n == 0) return 1
-    for(let i = 1; i <= n; i++){
-        result += i
-    }
-
-    return result
+    if(isNaN(n)) return;
+    n = parseFloat(n);
+    return n*(n+1)/2;
 }
+
 
 function collatz(n){
     if(n > 1000000000000000 || isNaN(n)) return
@@ -1657,10 +1941,10 @@ function digitMult(n){
     let result = [n];
     let sum;
 
-    while(String(result[result.length - 1]).length !== 1) {
+    while(String(result[result.length - 1]).replace(".", "").length !== 1) {
         sum = 1
-        for(let i = 0; i < String(n).length; i++){
-            sum *= parseInt(String(n)[i])
+        for(let i = 0; i < String(n).replace(".", "").length; i++){
+            sum *= parseInt(String(n).replace(".", "")[i])
         }
         result.push(sum)
         n = sum
@@ -1723,19 +2007,18 @@ function periodicElements(string){
 }
 
 function isPrime(n){
-    if(n == 1) return true
+    if(n <= 1) return false // 1 is not prime or composite number
 
-    if((n > 10 && [1, 3, 7, 9].includes(n % 10)) && digitSum(String(n)) % 3 != 0){
-        for(let i = 2; i < n; i++){
-            if(n % i == 0){
-                return false
-            }
+    for(let i = 2; i <= Math.sqrt(n); i++){ // its enough to check to the sqrt
+        if(n % i == 0){
+            return false;
         }
-        return true
-    } else {
-        return false
     }
+    return true;
+
+    // p.s., 32, pls, write comments on english only, it looks dissonantly, thanks.
 }
+
 
 function nearestPrime(string){
     string = Math.abs(parseInt(string))
@@ -1805,6 +2088,8 @@ function convertFromNumberSys(n, target){
     return symbols;
 }
 
+
+
 function decToNumberSys(n, target){
     let symbols = []
 
@@ -1821,7 +2106,7 @@ function fromBin(n){
 }
 
 function fromHex(n){
-    return convertFromNumberSys(n, 16)
+    return convertToText(n, 16)
 }
 
 function from36(n){
@@ -1860,23 +2145,50 @@ function unicode(string){
     return result;
 }
 
-function toRoman(n){
-    let result = ""
-    n = parseInt(n)
-    if(isNaN(n) || n >= 4999) return
-
-    if(n > 1000) {
-        result += ["", "M", "MM", "MMM", "MMMM"][Math.floor(n % 10000 / 1000)]
-    } if(n > 100) {
-        result += ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"][Math.floor(n % 1000 / 100)]
-    } if(n > 10) {
-        result += ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"][Math.floor(n % 100 / 10)]
-    } if(n >= 1) {
-        result += ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][Math.floor(n % 10)]
+var romans_primary=["I","X","C","M","ↂ","ↈ"];
+var romans_secondary=["S","V","L","D","ↁ","ↇ"];
+var romans_fraction=["","·",":","∴","∷","⁙","S","S·","S:","S∴","S∷","S⁙"]; // it turns out there are fractions of the form n/12
+if (true) {
+    let roman_1="CCCCIↃↃↃↃ";
+    let roman_2="IↃↃↃↃ";
+    for (let i=6;i<315;i++) {
+        romans_primary[i]=roman_1;
+        romans_secondary[i]=roman_2;
+        roman_1="C"+roman_1+"Ↄ";
+        roman_2=roman_2+"Ↄ";
     }
+} // there is a thing (im not sure about more than three pairs of C...Ↄ, but someone uses it.)
 
-    return result
+function toRoman(n) {
+    if (n<0) {return;}
+    if (!isFinite(n)) {return;}
+    if (n==0) {return "N";} // not exactly conventional
+    let n1=n;
+    if (n%1!=0) {
+        res=romans_fraction[Math.floor((12*n)%12)]; // fractional part
+        n=Math.floor(n);
+    } 
+    else {res="";}
+    let k=0;
+    for (let i=0;i<315;i++) { // main cycle
+        if (n==0) {break;}
+        let d=n%10;
+        if (d==1) {res=romans_primary[k]+res;}
+        else if (d==2) {res=romans_primary[k]+romans_primary[k]+res;}
+        else if (d==3) {res=romans_primary[k]+romans_primary[k]+romans_primary[k]+res;}
+        else if (d==4) {res=romans_primary[k]+romans_secondary[k+1]+res;}
+        else if (d==5) {res=romans_secondary[k+1]+res;}
+        else if (d==6) {res=romans_secondary[k+1]+romans_primary[k]+res;}
+        else if (d==7) {res=romans_secondary[k+1]+romans_primary[k]+romans_primary[k]+res;}
+        else if (d==8) {res=romans_secondary[k+1]+romans_primary[k]+romans_primary[k]+romans_primary[k]+res;}
+        else if (d==9) {res=romans_primary[k]+romans_primary[k+1]+res;}
+        n=Math.floor(n/10);
+        k++;
+    }
+    if (n1>Number.MAX_SAFE_INTEGER) {return "≈"+res;} // for double-precision numbers, the inaccuracy is proportional to the number of digits in the (binary) representation of the number. here, it exceeds 1.
+    return res;
 }
+
 
 function timestamp(n){
     if(isNaN(n) || 10000 > n >= 10000000000000000) return
@@ -2094,4 +2406,51 @@ function randint(nums){
     if(nums === null) return
 
     return Math.floor(Math.random() * (nums[1] + 1 - nums[0])) + nums[0]
+}
+
+function convertToCustomBase(params){
+
+    let n = params[0]
+    let digits = params[1]
+
+    if(isNaN(n)) 
+        return
+    n = parseInt(n)
+
+    if (digits.length == 1) return digits.repeat(n)
+
+    // let digits = "01"
+    // let num = 24 // (dec)
+
+    let result = ""
+    const base = digits.length
+
+    while(n >= base) {
+        result = digits[n % base] + result
+        n = Math.floor(n / base)
+    }
+
+    result = digits[n % base] + result
+
+    return result
+}
+
+function convertFromCustomBase(params){
+
+    let n = params[0]
+    let digits = params[1]
+
+    // let digits = "01"
+    // let num = 24 // (dec)
+
+    const numlen = n.length
+
+    let result = 0
+    const base = digits.length
+
+    for(let i = 0; i <= numlen; i++){
+        result += Math.pow(base, i) * digits.indexOf(n[numlen - i - 1]) 
+    }
+
+    return result
 }
