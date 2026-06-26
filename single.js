@@ -26,13 +26,13 @@ console.log(functionProperties)
 
 function display(){
     const result = f(document.getElementById("input").value)
-    document.getElementById("result").innerHTML = `<b>Result (${result.length} symbols):</b><br><p class="spaces">${result.replace('\n', '<br>')}</p>`
+    document.getElementById("result").innerHTML = `<b>Result (${result.length} symbols):</b><br><p class="spaces">${result.toString().replace('\n', '<br>')}</p>`
     return result
 }
 
 function displayTwoStrings(){
     const result = f([document.getElementById("input-1").value, document.getElementById("input-2").value])
-    document.getElementById("result").innerHTML = `<b>Result (${result.length} symbols):</b><br><p class="spaces">${result.replace('\n', '<br>')}</p>`
+    document.getElementById("result").innerHTML = `<b>Result (${result.length} symbols):</b><br><p class="spaces">${result.toString().replace('\n', '<br>')}</p>`
     return result
 }
 

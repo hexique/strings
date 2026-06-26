@@ -1,7 +1,7 @@
 changeTitle("documentation")
 
-const VERSION = "3.1"
-const LAST_UPDATE = "Apr 30"
+const VERSION = "3.13"
+const LAST_UPDATE = "Jun 26"
 const UPDATES = 20
 
 function format(firstInputId, secondInputId, methodId){

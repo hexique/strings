@@ -6,7 +6,7 @@ const methods = [[
     minMax, average, median, // num
     square, sqrt, powOf2, // powers
     sin, cos, tan, // trigonometry
-    divisiors, factorial, seqSum, collatz, // sequences
+    divisors, factorial, seqSum, collatz, // sequences
     digitSum, digitMult, // digits
     nearestPrime, nearestFibonacci, nearestSquare, // nearest
     round, // floats
@@ -73,7 +73,7 @@ const desc = {
     'cosine of n'},
     tan: {'inputType': 'float', 'content':
     'tangent of n'},
-    divisiors: {'inputType': 'int', 'content':
+    divisors: {'inputType': 'int', 'content':
     'outputs all numbers that n is divisible by (except n itself) and their sum'},
     factorial: {'inputType': 'int', 'content':
     '1 * 2 * 3 ... * n'},
@@ -87,9 +87,9 @@ const desc = {
     'multiplies all digits of a number'},
     nearestPrime: {'inputType': 'float', 'content':
     'the closest number without divisors to n'},
-    nearestFibonacci: {'inputType': 'float', 'content':
+    nearestFibonacci: {'inputType': 'int', 'content':
     'the closest number in the Fibonacci sequence to n'},
-    nearestSquare: {'inputType': 'float', 'content':
+    nearestSquare: {'inputType': 'int', 'content':
     'the nearest square number to n'},
     round: {'inputType': 'float', 'content':
     'rounds the number'},
@@ -1585,7 +1585,7 @@ function wordsLength(string){
     return splitByWords(string).length
 }
 
-function getDivisiors(n){
+function getdivisors(n){
     let result = [];
 
     for(let i = 1; i < n; i++){
@@ -1751,7 +1751,12 @@ function properties(n){
     // useless props
     result.push(`.isOdd(): ${n % 2 === 0}`)
     result.push(`.isNatural(): ${Math.abs(n) == n && n !== 0 && Math.floor(n) == n}`)
-    result.push(`.isPositive(): ${Math.abs(n) === n}`)
+    if(n === 0){
+        result.push(`.isPositive(): null`)
+    } else {
+        result.push(`.isPositive(): ${Math.abs(n) === n}`)
+    }
+    
     result.push(`.isInteger(): ${Math.floor(n) === n}`)
 
     return result.join("<br>")
@@ -2070,7 +2075,7 @@ function nearestSquare(n){
     }
 }
 
-function divisiors(n){
+function divisors(n){
     n = Math.abs(parseInt(n))
     if(n > 30000000 || isNaN(n)) return
     let result = [];
@@ -2083,9 +2088,9 @@ function divisiors(n){
         }
     }
 
-    if(result.length <= 1) return `No divisiors.`
+    if(result.length <= 1) return `No divisors.`
         
-    return `${result.join(" ")}<br>Sum: ${result.reduce((a, b) => a + b, 0)}<br>Total divisiors: ${result.length}`
+    return `${result.join(" ")}<br>Sum: ${result.reduce((a, b) => a + b, 0)}<br>Total divisors: ${result.length}`
 }
 
 function convertFromNumberSys(n, target){
