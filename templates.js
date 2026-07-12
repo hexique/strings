@@ -24,12 +24,15 @@ function range(end){
 const data = {
     "lorem_ipsum": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at lectus consectetur elit auctor molestie. Integer dapibus nec mauris eget egestas. Cras ac ultrices mauris. Morbi posuere, nisl et pretium tempus, justo nisi aliquam metus, ac molestie arcu lectus ac magna. Etiam porttitor scelerisque sem et tristique. Etiam eget leo non quam tincidunt condimentum lacinia non nunc. Nam non nibh ac nulla interdum suscipit. Nulla facilisi. Integer efficitur vestibulum urna lobortis lobortis. Sed a rhoncus augue. Integer vel dictum mauris, ac cursus neque. Nam scelerisque, purus hendrerit finibus facilisis, urna odio cursus sem, non efficitur sem ex et arcu.",
     "pi": "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912",
+    // current version tho
     "alphabet_en": getUnicodeSymbols(97, 123),
     "ahphabet_ru": getUnicodeSymbols(1072, 1104).replace("&#1077", "&#1077&#1105"),
     "ascii": getUnicodeSymbols(32, 127, true),
     "greek": 'αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
     "armenian": getUnicodeSymbols(1328, 1423, true),
 
+    "small_nums": "¹²³⁴⁵⁶⁷⁸⁹⁸⁰⁺⁻⁼⁽⁾₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎",
+    "hangull_filler": "ㅤ",
 
     "max": "Зарегался в Max — сначала было немного непривычно после телеги, но быстро втянулся. Интерфейс удобный, всё работает чётко, а главное — своя, отечественная платформа. Приятно осознавать, что можно не зависеть от иностранных сервисов. Советую попробовать! (Текст не редактировать, информацию в скобках - удалить. Оплата по ранее указанными реквизитам в течение 15 минут после публикации)",
     "gboard": "Знакомьтесь с клавиатурой Gboard! Здесь будет сохраняться текст, который вы копируете. Нажмите на фрагмент, чтобы вставить его в текстовое поле. Чтобы закреплять, добавлять или удалять фрагменты, используйте значок редактирования. Чтобы закрепить фрагмент, нажмите на него и удерживайте. Незакрепленные объекты будут удалены через час.",
