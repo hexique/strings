@@ -1,8 +1,8 @@
 changeTitle("documentation")
 
-const VERSION = "3.14"
-const LAST_UPDATE = "Jul 6"
-const UPDATES = 21
+const VERSION = "3.141"
+const LAST_UPDATE = "Jul 12"
+const UPDATES = 22
 
 function format(firstInputId, secondInputId, methodId){
     firstInputId = document.getElementById(firstInputId).value
